@@ -8,25 +8,52 @@ class CI_Code_Generator
 {
 
     /*
-     * Set these paths to the location of your assets.
+     * Localização dos arquivos da pasta "assets"
      */
     public static $assets_dir = 'assets/';
+    /**
+     * Css directory in assets
+     *
+     * @var string
+     */
     public static $css_dir = 'css/';
+
+    /**
+     * Sass directory in assets
+     *
+     * @var string
+     */
     public static $sass_dir  = 'css/sass/';
+
+    /**
+     * Less directory in assets
+     *
+     * @var string
+     */
     public static $less_dir  = 'css/less/';
 
+    /**
+     * Javascript directory in assets
+     *
+     * @var string
+     */
     public static $js_dir  = 'js/';
+
+    /**
+     * Coffescript directory in assets
+     *
+     * @var string
+     */
     public static $coffee_dir  = 'js/coffee/';
 
     /*
-     * The content for the generate file
+     * Content of generate file
      */
     public static $content;
 
-
     /**
      * As a convenience, fetch popular assets for user
-     * php artisan generate:assets jquery.js <---
+     * php ci-code-generator generator:assets jquery.js <---
      */
     public static $external_assets = array(
         // JavaScripts
@@ -34,15 +61,18 @@ class CI_Code_Generator
         'backbone.js' => 'http://backbonejs.org/backbone.js',
         'underscore.js' => 'http://underscorejs.org/underscore.js',
         'handlebars.js' => 'http://cloud.github.com/downloads/wycats/handlebars.js/handlebars-1.0.rc.1.js',
-
+        'jasmine-jquery' => 'https://raw.github.com/velesin/jasmine-jquery/master/lib/jasmine-jquery.js',
+        'livejs' => 'http://livejs.com/live.js',
         // CSS
-        'normalize.css' => 'https://raw.github.com/necolas/normalize.css/master/normalize.css'
+        'normalize.css' => 'https://raw.github.com/necolas/normalize.css/master/normalize.css',
+        'reset-css' => 'http://meyerweb.com/eric/tools/css/reset/reset200802.css'
     );
 
     public function __destruct(){
         echo <<<EOT
 \n
-It's so amazing! Thanks!
+Good job
+That's all folks!
 
 \n=====================END====================\n
 EOT;
@@ -97,7 +127,7 @@ EOT;
 
 
     /**
-     * Time Savers
+     * Function aliases
      *
      */
     public function c($args)   { return $this->controller($args); }
@@ -116,23 +146,23 @@ EOT;
     {
         echo <<<EOT
 \n=============GENERATOR COMMANDS=============\n
-generate:controller [name] [methods]
-generate:model [name]
-generate:view [name]
-generate:assets [asset]
+generator:controller [name] [methods]
+generator:model [name] [methods]
+generator:view [view]
+generator:assets [asset]
 \n=====================END====================\n
 EOT;
     }
 
 
     /**
-     * Generate a controller file with optional actions.
+     * Generator a controller file with optional actions.
      *
      * USAGE:
      *
-     * php artisan generate:controller Admin
-     * php artisan generate:controller Admin index edit
-     * php artisan generate:controller Admin index index:post restful
+     * php ci-code-generator generator:controller Admin
+     * php ci-code-generator generator:controller Admin index edit
+     * php ci-code-generator generator:controller Admin index index:post restful
      *
      * @param  $args array
      * @return string
@@ -150,11 +180,11 @@ EOT;
         $file_path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'controllers'. DIRECTORY_SEPARATOR . "$class_name.php";
 
         // Begin building up the file's content
-        self::$content = Template::generateClass($class_name, 'CI_Controller');
+        self::$content = Template::generatorClass($class_name, 'CI_Controller');
         $content = '';
         // Now we filter through the args, and create the funcs.
         foreach($args as $method) {
-            $content .= Template::generateFunction("{$method}");
+            $content .= Template::generatorFunction("{$method}");
         }
 
         // Add methods/actions to class.
@@ -167,11 +197,11 @@ EOT;
     }
 
     /**
-     * Generate a model file + boilerplate. (To be expanded.)
+     * Generator a model file + boilerplate. (To be expanded.)
      *
      * USAGE
      *
-     * php artisan generate:model User
+     * php ci-code-generator generator:model User
      *
      * @param  $args array
      * @return string
@@ -185,11 +215,11 @@ EOT;
         $file_path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'models'. DIRECTORY_SEPARATOR . str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $class_name) . '.php';
 
         // Begin building up the file's content
-        self::$content = Template::generateClass($class_name, 'CI_Model');
+        self::$content = Template::generatorClass($class_name, 'CI_Model');
         $content = '';
         // Now we filter through the args, and create the funcs.
         foreach($args as $method) {
-            $content .= Template::generateFunction("{$method}");
+            $content .= Template::generatorFunction("{$method}");
         }
 
         // Add methods/actions to class.
@@ -205,8 +235,8 @@ EOT;
      *
      * USAGE:
      *
-     * php artisan generate:view home show
-     * php artisan generate:view home.index home.show
+     * php ci-code-generator generator:view home show
+     * php ci-code-generator generator:view home.index home.show
      *
      * @param $args array
      * @return void
@@ -236,7 +266,7 @@ EOT;
      */
     protected function write_to_file($file_path,  $success = '')
     {
-        $success = $success ?: "[X] Create: $file_path.\n";
+        $success = $success ?: "[X] Created: $file_path.\n\n";
 
         if ( file_exists($file_path) ) {
             // we don't want to overwrite it
@@ -295,7 +325,7 @@ EOT;
      * Create assets in the public directory
      *
      * USAGE:
-     * php artisan generate:assets style1.css some_module.js
+     * php ci-code-generator generator:assets style1.css some_module.js
      *
      * @param  $assets array
      * @return void
@@ -386,7 +416,7 @@ EOT;
  */
 class Template {
 
-    public static function generateFunction($func_name)
+    public static function generatorFunction($func_name)
     {
         return <<<EOT
 
@@ -403,12 +433,12 @@ EOT;
     }
 
     /**
-     * Generate class with your extended class
+     * Generator class with your extended class
      * @param string $name
      * @param string $extends_class
      * @return type
      */
-    public static function generateClass($name, $extends_class = null)
+    public static function generatorClass($name, $extends_class = null)
     {
         $content = "
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
