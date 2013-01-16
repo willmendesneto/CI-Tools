@@ -39,14 +39,24 @@ class CI_Code_Generator
         'normalize.css' => 'https://raw.github.com/necolas/normalize.css/master/normalize.css'
     );
 
+    public function __destruct(){
+        echo <<<EOT
+\n
+It's so amazing! Thanks!
+
+\n=====================END====================\n
+EOT;
+
+    }
+
     public function run(array $arguments){
 
         echo <<<EOT
-\n=============  CI Code Generator - Wilson Mendes Neto  =============\n
+\n=============  CI CODE GENERATOR - WILSON MENDES NETO  =============\n
 
 Please waiting...We're working!
 
-\n=====================END====================\n
+\n
 EOT;
         if ( ! isset($arguments[0]))
             throw new Exception("Please choice a option.\n" . $this->help());
@@ -58,10 +68,10 @@ EOT;
         if (is_null($task))
             throw new Exception("Sorry, I can't find that task.");
 
-        if (is_callable(array($this, $method)))
-            $this->$method(array_slice($arguments, 1));
-        else
+        if ( !is_callable(array($this, $method)) )
             throw new Exception("Sorry, I can't find that method!");
+
+        $this->$method(array_slice($arguments, 1));
     }
 
 
@@ -109,7 +119,6 @@ EOT;
 generate:controller [name] [methods]
 generate:model [name]
 generate:view [name]
-generate:test [name] [methods]
 generate:assets [asset]
 \n=====================END====================\n
 EOT;
@@ -131,15 +140,14 @@ EOT;
     public function controller($args)
     {
         if ( empty($args) ) {
-            echo "Error: Please supply a class name, and your desired methods.\n";
-            return;
+            throw new Exception("Error: Please supply a class name, and your desired methods.\n");
         }
 
         // Name of the class and file
         $class_name = ucwords(array_shift($args));
 
         // Where will this file be stored?
-        $file_path = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'controllers'. DIRECTORY_SEPARATOR . "$class_name.php";
+        $file_path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'controllers'. DIRECTORY_SEPARATOR . "$class_name.php";
 
         // Begin building up the file's content
         self::$content = Template::generateClass($class_name, 'CI_Controller');
@@ -158,6 +166,65 @@ EOT;
 
     }
 
+    /**
+     * Generate a model file + boilerplate. (To be expanded.)
+     *
+     * USAGE
+     *
+     * php artisan generate:model User
+     *
+     * @param  $args array
+     * @return string
+     */
+    public function model($args)
+    {
+
+        // Name of the class and file
+        $class_name = ucwords(array_shift($args));
+
+        $file_path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'models'. DIRECTORY_SEPARATOR . str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $class_name) . '.php';
+
+        // Begin building up the file's content
+        self::$content = Template::generateClass($class_name, 'CI_Model');
+        $content = '';
+        // Now we filter through the args, and create the funcs.
+        foreach($args as $method) {
+            $content .= Template::generateFunction("{$method}");
+        }
+
+        // Add methods/actions to class.
+        self::$content = $this->add_after('{', $content, self::$content);
+        // Prettify
+        $this->prettify();
+        // Create the file
+        $this->write_to_file($file_path);
+    }
+
+    /**
+     * Create any number of views
+     *
+     * USAGE:
+     *
+     * php artisan generate:view home show
+     * php artisan generate:view home.index home.show
+     *
+     * @param $args array
+     * @return void
+     */
+    public function view($paths)
+    {
+        if ( empty($paths) ) {
+            throw new Exception("Warning: no views were specified. Add some!\n");
+        }
+
+        foreach( $paths as $path ) {
+            $file_path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'views'. DIRECTORY_SEPARATOR . str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $path) . '.php';
+
+            self::$content = "This is the $file_path view";
+            $this->write_to_file($file_path);
+        }
+    }
+
 
     /**
      * Write the contents to the specified file
@@ -169,22 +236,23 @@ EOT;
      */
     protected function write_to_file($file_path,  $success = '')
     {
-        $success = $success ?: "Create: $file_path.\n";
+        $success = $success ?: "[X] Create: $file_path.\n";
 
         if ( file_exists($file_path) ) {
             // we don't want to overwrite it
-            echo "Warning: File already exists at $file_path\n";
-            return;
+            throw new Exception("Warning: File already exists at $file_path\n");
         }
 
         // As a precaution, let's see if we need to make the folder.
-        mkdir(dirname($file_path));
-
+        if( !is_dir(dirname($file_path))){
+            mkdir(dirname($file_path));
+        }
         if ( file_put_contents($file_path, self::$content) !== false ) {
             echo $success;
-        } else {
-            echo "Whoops - something...erghh...went wrong!\n";
+            return;
         }
+
+        echo "[ ] Whoops - something wrong! I can't create file in $file_path \n";
     }
 
 
@@ -221,55 +289,6 @@ EOT;
         return str_replace($where, $where . $to_add, $content);
     }
 
-    /**
-     * Generate a model file + boilerplate. (To be expanded.)
-     *
-     * USAGE
-     *
-     * php artisan generate:model User
-     *
-     * @param  $args array
-     * @return string
-     */
-    public function model($args)
-    {
-        // Name of the class and file
-        $class_name = is_array($args) ? ucwords($args[0]) : ucwords($args);
-
-        $file_path = $this->path('models') . strtolower("$class_name.php");
-
-        // Begin building up the file's content
-        Template::generateClass($class_name, 'Eloquent' );
-        $this->prettify();
-
-        // Create the file
-        $this->write_to_file($file_path);
-    }
-
-    /**
-     * Create any number of views
-     *
-     * USAGE:
-     *
-     * php artisan generate:view home show
-     * php artisan generate:view home.index home.show
-     *
-     * @param $args array
-     * @return void
-     */
-    public function view($paths)
-    {
-        if ( empty($paths) ) {
-            echo "Warning: no views were specified. Add some!\n";
-            return;
-        }
-
-        foreach( $paths as $path ) {
-            $file_path = $this->path('views') . str_replace('.', '/', $path) . '.blade.php';
-            self::$content = "This is the $file_path view";
-            $this->write_to_file($file_path);
-        }
-    }
 
 
     /**
