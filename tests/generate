@@ -16,14 +16,14 @@
 
 define('CIUnit', '0.17');
 
-require_once (dirname(__FILE__) . '/../application/third_party/CIUnitTest/bootstrap_phpunit.php');
+require_once (dirname(__FILE__) . '/../application/third_party/CIUnit/bootstrap_phpunit.php');
 
 // Set the controller to the default controller.  This allows us access to the
 // CI framework.
 set_controller();
 
 /*
- * this function for extraction of command line arguments 
+ * this function for extraction of command line arguments
  * might go back into some foo helper class
  */
 function args_arr($arg_arr = false)
@@ -34,16 +34,16 @@ function args_arr($arg_arr = false)
     } else {
         $argv = $arg_arr;
     }
-    
+
     array_shift($argv);
-    
+
     $flags = array();
     $params = array();
     $args = array();
-    
+
     foreach ($argv as $arg) {
         $param_parts = preg_split('/=/', $arg);
-        
+
         if (count($param_parts) == 2) {
             $params[$param_parts[0]] = $param_parts[1];
         } else {
@@ -54,7 +54,7 @@ function args_arr($arg_arr = false)
             }
         }
     }
-    
+
     return array('params' => $params, 'flags' => $flags, 'args' => $args);
 }
 
@@ -63,7 +63,7 @@ class Generate {
     function __construct()
     {
         $this->CI = &get_instance();
-        
+
         $this->CI->spyc = new Spyc();
         $this->Ci->fixture = new Fixture();
 
@@ -100,14 +100,14 @@ e.g.: 'php generate help migration'
     {
         $db = isset($this->params['db'])? $this->params['db']:'db';
         $prefix = ($db == 'db2')? "db2_":"";
-        
+
         /**
          * Update this controller to your default controller
          */
         $this->CI = set_controller('home');
 
         echo "generating...\n";
-        
+
         $tables = $this->CI->$db->list_tables();
         foreach ($tables as $table)
         {

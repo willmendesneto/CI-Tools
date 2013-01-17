@@ -68,7 +68,7 @@ class CI_Code_Generator
         'reset-css' => 'http://meyerweb.com/eric/tools/css/reset/reset200802.css'
     );
 
-    public function __destruct(){
+    /*public function __destruct(){
         echo <<<EOT
 \n
 Good job
@@ -77,7 +77,7 @@ That's all folks!
 \n=====================END====================\n
 EOT;
 
-    }
+    }*/
 
     public function run(array $arguments){
 
@@ -253,6 +253,7 @@ EOT;
             self::$content = "This is the $file_path view";
             $this->write_to_file($file_path);
         }
+        return true;
     }
 
 

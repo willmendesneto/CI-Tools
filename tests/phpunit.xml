@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <phpunit
     colors="true"
     stopOnFailure="false"
+    backupGlobals="false"
     bootstrap="../application/third_party/CIUnit/bootstrap_phpunit.php">
     <php>
         <const name="CIUnit_Version" value="0.17"/>
@@ -10,7 +9,7 @@
     </php>
     <testsuites>
         <testsuite name="LibTests">
-            <directory suffix=".php">libs</directory>
+            <directory>./libs/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
