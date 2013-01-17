@@ -7,10 +7,12 @@
 class CI_Code_Generator
 {
 
-    /*
-     * Localização dos arquivos da pasta "assets"
+    /**
+     * Folder "assets" localization
+     *
      */
     public static $assets_dir = 'assets/';
+
     /**
      * Css directory in assets
      *
@@ -46,14 +48,15 @@ class CI_Code_Generator
      */
     public static $coffee_dir  = 'js/coffee/';
 
-    /*
+    /**
      * Content of generate file
      */
     public static $content;
 
     /**
      * As a convenience, fetch popular assets for user
-     * php ci-code-generator generator:assets jquery.js <---
+     *
+     * php ci-code-generator generator:assets jquery.js
      */
     public static $external_assets = array(
         // JavaScripts
@@ -68,7 +71,7 @@ class CI_Code_Generator
         'reset-css' => 'http://meyerweb.com/eric/tools/css/reset/reset200802.css'
     );
 
-    /*public function __destruct(){
+    public function __destruct(){
         echo <<<EOT
 \n
 Good job
@@ -77,17 +80,16 @@ That's all folks!
 \n=====================END====================\n
 EOT;
 
-    }*/
+    }
 
+    /**
+     * Running the file in command line
+     *
+     * @param array $arguments var $argv [http://php.net/manual/pt_BR/reserved.variables.argv.php]
+     * @return type
+     */
     public function run(array $arguments){
 
-        echo <<<EOT
-\n=============  CI CODE GENERATOR - WILSON MENDES NETO  =============\n
-
-Please waiting...We're working!
-
-\n
-EOT;
         if ( ! isset($arguments[0]))
             throw new Exception("Please choice a option.\n" . $this->help());
 
@@ -108,7 +110,7 @@ EOT;
     /**
      * Parse the task name to extract the bundle, task, and method.
      *
-     * @param  string  $task
+     * @param string $task
      * @return array
      */
     protected static function parse($task)
@@ -117,8 +119,8 @@ EOT;
         // Extract the task method from the task string. Methods are called
         // on tasks by separating the task and method with a single colon.
         // If no task is specified, "run" is used as the default.
-        if (strpos($task, ':') !== FALSE)
-            list($task, $method) = explode(':', $task);
+        if (strpos($task, 'generator:') !== FALSE)
+            list($task, $method) = explode('generator:', $task);
         else
             $method = 'help';
 
@@ -127,7 +129,7 @@ EOT;
 
 
     /**
-     * Function aliases
+     * Methods aliases
      *
      */
     public function c($args)   { return $this->controller($args); }
@@ -139,18 +141,18 @@ EOT;
     public function r($args)   { return $this->resource($args); }
 
     /**
-     * Simply echos out some help info.
+     * Printing help info with implemented methods.
      *
      */
     public function help()
     {
         echo <<<EOT
-\n=============GENERATOR COMMANDS=============\n
+\n=============  GENERATOR COMMANDS  =============\n
 generator:controller [name] [methods]
 generator:model [name] [methods]
 generator:view [view]
 generator:assets [asset]
-\n=====================END====================\n
+\n=====================  END  ====================\n
 EOT;
     }
 
@@ -158,13 +160,12 @@ EOT;
     /**
      * Generator a controller file with optional actions.
      *
-     * USAGE:
+     * HOW TO USE:
      *
      * php ci-code-generator generator:controller Admin
      * php ci-code-generator generator:controller Admin index edit
-     * php ci-code-generator generator:controller Admin index index:post restful
      *
-     * @param  $args array
+     * @param array $args
      * @return string
      */
     public function controller($args)
@@ -197,13 +198,14 @@ EOT;
     }
 
     /**
-     * Generator a model file + boilerplate. (To be expanded.)
+     * Generator a model file
      *
-     * USAGE
+     * HOW TO USE:
      *
      * php ci-code-generator generator:model User
+     * php ci-code-generator generator:model User getUsers
      *
-     * @param  $args array
+     * @param array $args
      * @return string
      */
     public function model($args)
@@ -235,11 +237,11 @@ EOT;
      *
      * USAGE:
      *
-     * php ci-code-generator generator:view home show
-     * php ci-code-generator generator:view home.index home.show
+     * php ci-code-generator generator:view index
+     * php ci-code-generator generator:view index add edit
      *
-     * @param $args array
-     * @return void
+     * @param array $args
+     * @return bool
      */
     public function view($paths)
     {
@@ -256,14 +258,12 @@ EOT;
         return true;
     }
 
-
     /**
      * Write the contents to the specified file
      *
-     * @param  $file_path string
-     * @param $content string
-     * @param $type string [model|controller|migration]
-     * @return void
+     * @param string $file_path File path
+     * @param string $success Default return printed for in command line Cli
+     * @return type
      */
     protected function write_to_file($file_path,  $success = '')
     {
