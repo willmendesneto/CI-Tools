@@ -4,14 +4,6 @@ php:
   - 5.3
   - 5.4
 
-env:
-  - DB=mysql
-  - DB=pgsql
-  - DB=sqlite
-  - DB=pdo/mysql
-  - DB=pdo/pgsql
-  - DB=pdo/sqlite
-
 before_script:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install
