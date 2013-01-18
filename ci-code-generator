@@ -3,6 +3,7 @@
 // --------------------------------------------------------------
 // Launch the CI Code Generator.
 // --------------------------------------------------------------
+
 require 'application' . DIRECTORY_SEPARATOR . 'libraries' . DIRECTORY_SEPARATOR . 'CI_Code_Generator' . DIRECTORY_SEPARATOR . 'CI_Code_Generator.php';
 
 try
