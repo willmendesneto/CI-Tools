@@ -35,13 +35,7 @@ Generate a view file with the specified name in `application/views` directory
 
 ### Generator:model
 
-Generate a view file with the specified name in 'application/models' directory
-
-    php ci-code-generator generator:model [name-of-model] [methods]
-
-### Generator:model
-
-Generate a view file with the specified name in 'application/controllers' directory
+Generate a model file with the specified name in 'application/models' directory
 
     php ci-code-generator generator:model [name-of-model] [methods]
 
