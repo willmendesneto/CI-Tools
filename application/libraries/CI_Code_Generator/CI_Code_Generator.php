@@ -278,10 +278,10 @@ EOT;
         if( !is_dir(dirname($file_path))){
             mkdir(dirname($file_path));
         }
-        if ( file_put_contents($file_path, self::$content) !== false ) {
+        /*if ( file_put_contents($file_path, self::$content) !== false ) {
             echo $success;
             return;
-        }
+        }*/
 
         echo "[ ] Whoops - something wrong! I can't create file in $file_path \n";
     }
