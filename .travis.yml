@@ -8,4 +8,4 @@ before_script:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install
 
-script: php vendor/phpunit/phpunit/composer/bin/phpunit --configuration tests/phpunit.xml tests/libs/test_ci_code_generator.php
+script: php vendor/phpunit/phpunit/composer/bin/phpunit tests/libs/test_ci_code_generator.php
