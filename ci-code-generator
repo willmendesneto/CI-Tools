@@ -1,9 +1,12 @@
 <?php
 
+define('ROOT_DIR', __DIR__);
+define('DS', DIRECTORY_SEPARATOR);
+
 // --------------------------------------------------------------
 // Launch the CI Code Generator.
 // --------------------------------------------------------------
-require 'application' . DIRECTORY_SEPARATOR . 'libraries' . DIRECTORY_SEPARATOR . 'CI_Code_Generator' . DIRECTORY_SEPARATOR . 'CI_Code_Generator.php';
+require 'application' . DS . 'libraries' . DS . 'CI_Code_Generator' . DS . 'CI_Code_Generator.php';
 
 try
 {
