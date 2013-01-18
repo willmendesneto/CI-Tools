@@ -177,7 +177,7 @@ EOT;
         $class_name = ucwords(array_shift($args));
 
         // Where will this file be stored?
-        $file_path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'controllers'. DIRECTORY_SEPARATOR . "$class_name.php";
+        $file_path = ROOT_DIR . DS . 'application' . DS . 'controllers'. DS . "$class_name.php";
 
         // Begin building up the file's content
         self::$content = Template::generatorClass($class_name, 'CI_Controller');
@@ -193,7 +193,6 @@ EOT;
         $this->prettify();
         // Create the file
         $this->write_to_file($file_path);
-
     }
 
     /**
@@ -212,7 +211,7 @@ EOT;
         // Name of the class and file
         $class_name = ucwords(array_shift($args));
 
-        $file_path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'models'. DIRECTORY_SEPARATOR . str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $class_name) . '.php';
+        $file_path = ROOT_DIR . DS . 'application' . DS. 'models'. DS . str_replace(array('\\', '/'), DS, $class_name) . '.php';
 
         // Begin building up the file's content
         self::$content = Template::generatorClass($class_name, 'CI_Model');
@@ -248,7 +247,7 @@ EOT;
         }
 
         foreach( $paths as $path ) {
-            $file_path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'views'. DIRECTORY_SEPARATOR . str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $path) . '.php';
+            $file_path = ROOT_DIR . DS . 'application' . DS. 'views'. DS . str_replace(array('\\', '/'), DS, $path) . '.php';
 
             self::$content = "This is the $file_path view";
             $this->write_to_file($file_path);
@@ -278,10 +277,10 @@ EOT;
         if( !is_dir(dirname($file_path))){
             mkdir(dirname($file_path));
         }
-        /*if ( file_put_contents($file_path, self::$content) !== false ) {
+        if ( file_put_contents($file_path, self::$content) !== false ) {
             echo $success;
             return;
-        }*/
+        }
 
         echo "[ ] Whoops - something wrong! I can't create file in $file_path \n";
     }
