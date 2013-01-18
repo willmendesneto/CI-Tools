@@ -71,17 +71,6 @@ class CI_Code_Generator
         'reset-css' => 'http://meyerweb.com/eric/tools/css/reset/reset200802.css'
     );
 
-    public function __destruct(){
-        echo <<<EOT
-\n
-Good job
-That's all folks!
-
-\n=====================END====================\n
-EOT;
-
-    }
-
     /**
      * Running the file in command line
      *
