@@ -1,7 +1,7 @@
 CI-Code-Generator
 =================
 
-A code generator console for Codeigniter Framework. Based in others code generators
+A code generator console for Codeigniter Framework. Based in other code generators
 * Artisan (Laravel Framework)
 * Bake (CakePHP)
 
@@ -14,7 +14,8 @@ A code generator console for Codeigniter Framework. Based in others code generat
 
 2 Enable PHP command line in your project
 
-After this, open de cmd and navigate to your project folder
+After this, open de cmd and navigate to your project folder:
+
 Windows
 
     cd path/of/your/project/
@@ -28,25 +29,20 @@ Linux
 
 ### Generator:view
 
-Generate a view file with the specified name in 'application/views' directory
-    php generator:view [names-of-views]
+Generate a view file with the specified name in `application/views` directory
+
+    php ci-code-generator generator:view [names-of-views]
 
 ### Generator:model
 
-Generate a view file with the specified name in 'application/models' directory
-    php generator:model [name-of-model] [methods]
+Generate a view file with the specified name in `application/models` directory
+
+    php ci-code-generator generator:model [name-of-model] [methods]
 
 ### Generator:controller
 
-Generate a view file with the specified name in 'application/controllers' directory
-    php generator:controller [name-of-controller] [methods]
+Generate a view file with the specified name in `application/controllers` directory
 
-
-
-
+    php ci-code-generator generator:controller [name-of-controller] [methods]
 
 ### * New features soon
-
-
-
-
