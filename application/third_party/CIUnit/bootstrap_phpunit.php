@@ -155,7 +155,6 @@ if ( ! defined('DS') ) {
         define ('CIUPATH', APPPATH . 'third_party/' . $ciunit_folder);
     }
 
-
     // The path to the Tests folder
     define('TESTSPATH', $tests_folder . DS);
 
@@ -169,7 +168,6 @@ if ( ! defined('DS') ) {
 require_once CIUPATH . 'core/CodeIgniter' . EXT;
 
 // Autoload the PHPUnit Framework
-//require_once ('PHPUnit/Autoload.php');
 require_once __DIR__ . DS . '..'. DS . '..'. DS . '..'. DS. 'vendor' . DS . 'autoload.php';
 
 
