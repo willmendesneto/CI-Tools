@@ -31,7 +31,7 @@ if ( ! defined('CIUnit_Version') ) {
  * is that the tests folder is in the same directory path as system.  If
  * it is not, update the paths appropriately.
  */
-    $system_path = dirname(__FILE__) . "/../../../system";
+    $system_path = __DIR__ . "/../../../system";
 
 /*
  *---------------------------------------------------------------
@@ -50,7 +50,7 @@ if ( ! defined('CIUnit_Version') ) {
  * is that the tests folder is in the same directory as the application
  * folder.  If it is not, update the path accordingly.
  */
-    $application_folder = dirname(__FILE__) . "/../../../application";
+    $application_folder = __DIR__ . "/../../../application";
 
 /**
  * --------------------------------------------------------------
@@ -64,7 +64,7 @@ if ( ! defined('CIUnit_Version') ) {
  * NO TRAILING SLASH!
  *
  */
-    $ciunit_folder = dirname(__FILE__);
+    $ciunit_folder = __DIR__;
 
 /**
  * --------------------------------------------------------------
@@ -73,7 +73,7 @@ if ( ! defined('CIUnit_Version') ) {
  *
  * This is the path to the tests folder.
  */
-    $tests_folder = dirname(__FILE__) . "/../../../tests";
+    $tests_folder = __DIR__ . "/../../../tests";
 
 // --------------------------------------------------------------------
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
