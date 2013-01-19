@@ -1,22 +1,19 @@
 <?php
-
-//include_once dirname(__FILE__) . '/../../application/third_party/CIUnit/bootstrap_phpunit.php';
-
 /**
- * Tests of CI_Code_Generator librarie
+ * Tests of CiCodeGeneratorTest librarie
  *
  * Run the phpunit with command
  *
- *  	php vendor/phpunit/phpunit/composer/bin/phpunit tests/libs/test_ci_code_generator.php
+ *  	php vendor/phpunit/phpunit/composer/bin/phpunit -c tests/phpunit.xml --verbose --coverage-text tests/
  * OR
- *  	php vendor/phpunit/phpunit/composer/bin/phpunit --testdox tests/libs/test_ci_code_generator.php
+ *  	php vendor/phpunit/phpunit/composer/bin/phpunit -c tests/phpunit.xml --testdox tests/
  *
  * @author      Wilson Mendes Neto <willmendesneto@gmail.com>
  * @license     Nops!
  * @version     0.1
  * @since       January 17, 2013
  */
-class Test_Ci_Code_Generator extends CIUnit_TestCase {
+class CiCodeGeneratorTest extends CIUnit_TestCase {
 
 	/**
 	 * Dependency injection with CI_Code_Generator class
@@ -63,13 +60,13 @@ class Test_Ci_Code_Generator extends CIUnit_TestCase {
 		parent::tearDown();
 
 		//	Setting Models Directory
-		$this->modelsDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR;
+		$this->modelsDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR;
 
 		//	Setting Views Directory
-		$this->viewsDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR;
+		$this->viewsDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR;
 
 		//	Setting Controllers Directory
-		$this->controllersDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR;
+		$this->controllersDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR;
 
 		$this->deleteFiles($this->viewsDirectory);
 		$this->deleteFiles($this->modelsDirectory);
@@ -223,5 +220,5 @@ class Test_Ci_Code_Generator extends CIUnit_TestCase {
 
 }
 
-/* End of file test_generator.php */
-/* Location: tests/libs/test_generator.php */
+/* End of file CiCodeGeneratorTest.php */
+/* Location: .//D/projects/ci-code-generator/tests/CiCodeGeneratorTest.php */
