@@ -8,7 +8,9 @@
     convertWarningsToExceptions="true"
     processIsolation="false"
     syntaxCheck="false"
-    bootstrap="../vendor/autoload.php">
+    cacheTokens="true"
+    verbose="false"
+    bootstrap="../application/third_party/CIUnit/bootstrap_phpunit.php">
     <filter>
         <exclude>
             <file>generate</file>

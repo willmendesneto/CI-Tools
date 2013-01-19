@@ -1,6 +1,6 @@
 <?php
 
-include_once dirname(__FILE__) . '/../../application/third_party/CIUnit/bootstrap_phpunit.php';
+//include_once dirname(__FILE__) . '/../../application/third_party/CIUnit/bootstrap_phpunit.php';
 
 /**
  * Tests of CI_Code_Generator librarie
