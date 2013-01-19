@@ -4,6 +4,9 @@ if ( ! defined('CIUnit_Version') ) {
 	define('CIUnit_Version', 0.17);
 }
 
+if ( ! defined('DS') ) {
+    define('DS', DIRECTORY_SEPARATOR);
+}
 /*
  *---------------------------------------------------------------
  * PHP ERROR REPORTING LEVEL
@@ -31,7 +34,7 @@ if ( ! defined('CIUnit_Version') ) {
  * is that the tests folder is in the same directory path as system.  If
  * it is not, update the paths appropriately.
  */
-    $system_path = dirname(__FILE__) . "/../../../system";
+    $system_path = dirname(__FILE__) . DS . '..'. DS .'..'. DS .'..'. DS .'system';
 
 /*
  *---------------------------------------------------------------
@@ -50,7 +53,7 @@ if ( ! defined('CIUnit_Version') ) {
  * is that the tests folder is in the same directory as the application
  * folder.  If it is not, update the path accordingly.
  */
-    $application_folder = dirname(__FILE__) . "/../..";
+    $application_folder = dirname(__FILE__) . DS . '..'. DS .'..'. DS .'..'. DS .'application';
 
 /**
  * --------------------------------------------------------------
@@ -73,7 +76,7 @@ if ( ! defined('CIUnit_Version') ) {
  *
  * This is the path to the tests folder.
  */
-    $tests_folder = dirname(__FILE__) . "/../../../tests";
+    $tests_folder = dirname(__FILE__) . DS . '..'. DS .'..'. DS .'..'. DS .'tests';
 
 // --------------------------------------------------------------------
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
@@ -96,7 +99,7 @@ if ( ! defined('CIUnit_Version') ) {
     // Is the system path correct?
     if ( ! is_dir($system_path))
     {
-        exit("Your system folder path does not appear to be set correctly. Please open the following file and correct this: ".pathinfo(__FILE__, PATHINFO_BASENAME));
+        throw new Exception("Your system folder path does not appear to be set correctly. Please open the following file and correct this: ".pathinfo(__FILE__, PATHINFO_BASENAME));
     }
 
 /*
@@ -129,7 +132,7 @@ if ( ! defined('CIUnit_Version') ) {
     {
         if ( ! is_dir(BASEPATH.$application_folder.'/'))
         {
-            exit("Your application folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
+            throw new Exception("Your application folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
         }
 
         define('APPPATH', BASEPATH.$application_folder.'/');
@@ -144,7 +147,7 @@ if ( ! defined('CIUnit_Version') ) {
     {
         if ( ! is_dir(APPPATH . 'third_party/' . $ciunit_folder))
         {
-            exit("Your CIUnit folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
+            throw new Exception("Your CIUnit folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
         }
 
         define ('CIUPATH', APPPATH . 'third_party/' . $ciunit_folder);
