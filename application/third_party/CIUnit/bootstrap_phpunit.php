@@ -1,12 +1,9 @@
 <?php
 
 if ( ! defined('CIUnit_Version') ) {
-	define('CIUnit_Version', 0.17);
+    define('CIUnit_Version', 0.17);
 }
 
-if ( ! defined('DS') ) {
-    define('DS', DIRECTORY_SEPARATOR);
-}
 /*
  *---------------------------------------------------------------
  * PHP ERROR REPORTING LEVEL
@@ -34,7 +31,7 @@ if ( ! defined('DS') ) {
  * is that the tests folder is in the same directory path as system.  If
  * it is not, update the paths appropriately.
  */
-    $system_path = dirname(__FILE__) . DS . '..'. DS .'..'. DS .'..'. DS .'system';
+    $system_path = dirname(__FILE__) . "/../../../system";
 
 /*
  *---------------------------------------------------------------
@@ -53,7 +50,7 @@ if ( ! defined('DS') ) {
  * is that the tests folder is in the same directory as the application
  * folder.  If it is not, update the path accordingly.
  */
-    $application_folder = dirname(__FILE__) . DS . '..'. DS .'..'. DS .'..'. DS .'application';
+    $application_folder = dirname(__FILE__) . "/../..";
 
 /**
  * --------------------------------------------------------------
@@ -76,7 +73,7 @@ if ( ! defined('DS') ) {
  *
  * This is the path to the tests folder.
  */
-    $tests_folder = dirname(__FILE__) . DS . '..'. DS .'..'. DS .'..'. DS .'tests';
+    $tests_folder = dirname(__FILE__) . "/../../../tests";
 
 // --------------------------------------------------------------------
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
@@ -99,7 +96,7 @@ if ( ! defined('DS') ) {
     // Is the system path correct?
     if ( ! is_dir($system_path))
     {
-        throw new Exception("Your system folder path does not appear to be set correctly. Please open the following file and correct this: ".pathinfo(__FILE__, PATHINFO_BASENAME));
+        exit("Your system folder path does not appear to be set correctly. Please open the following file and correct this: ".pathinfo(__FILE__, PATHINFO_BASENAME));
     }
 
 /*
@@ -114,7 +111,7 @@ if ( ! defined('DS') ) {
     define('EXT', '.php');
 
     // Path to the system folder
-    define('BASEPATH', str_replace("\\", "/", $system_path));
+    define('BASEPATH', str_replace(array("\\", "/"), DIRECTORY_SEPARATOR, $system_path));
 
     // Path to the front controller (this file)
     define('FCPATH', str_replace(SELF, '', __FILE__));
@@ -132,7 +129,7 @@ if ( ! defined('DS') ) {
     {
         if ( ! is_dir(BASEPATH.$application_folder.'/'))
         {
-            throw new Exception("Your application folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
+            exit("Your application folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
         }
 
         define('APPPATH', BASEPATH.$application_folder.'/');
@@ -147,7 +144,7 @@ if ( ! defined('DS') ) {
     {
         if ( ! is_dir(APPPATH . 'third_party/' . $ciunit_folder))
         {
-            throw new Exception("Your CIUnit folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
+            exit("Your CIUnit folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
         }
 
         define ('CIUPATH', APPPATH . 'third_party/' . $ciunit_folder);
