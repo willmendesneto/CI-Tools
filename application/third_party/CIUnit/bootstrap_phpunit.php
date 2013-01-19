@@ -4,6 +4,10 @@ if ( ! defined('CIUnit_Version') ) {
     define('CIUnit_Version', 0.17);
 }
 
+if ( ! defined('DS') ) {
+    define('DS', DIRECTORY_SEPARATOR);
+}
+
 /*
  *---------------------------------------------------------------
  * PHP ERROR REPORTING LEVEL
@@ -31,7 +35,7 @@ if ( ! defined('CIUnit_Version') ) {
  * is that the tests folder is in the same directory path as system.  If
  * it is not, update the paths appropriately.
  */
-    $system_path = __DIR__ . "/../../../system";
+    $system_path = __DIR__ . DS .'..' . DS . '..' . DS . '..' . DS . 'system';
 
 /*
  *---------------------------------------------------------------
@@ -50,7 +54,7 @@ if ( ! defined('CIUnit_Version') ) {
  * is that the tests folder is in the same directory as the application
  * folder.  If it is not, update the path accordingly.
  */
-    $application_folder = __DIR__ . "/../../../application";
+    $application_folder = __DIR__ . DS .'..' . DS . '..' . DS . '..' . DS . 'application';
 
 /**
  * --------------------------------------------------------------
@@ -73,7 +77,7 @@ if ( ! defined('CIUnit_Version') ) {
  *
  * This is the path to the tests folder.
  */
-    $tests_folder = __DIR__ . "/../../../tests";
+    $tests_folder = __DIR__ . DS .'..' . DS . '..' . DS . '..' . DS . 'tests';
 
 // --------------------------------------------------------------------
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
@@ -88,11 +92,11 @@ if ( ! defined('CIUnit_Version') ) {
 
     if (realpath($system_path) !== FALSE)
     {
-        $system_path = realpath($system_path).'/';
+        $system_path = realpath($system_path) . DS;
     }
 
     // ensure there's a trailing slash
-    $system_path = rtrim($system_path, '/').'/';
+    $system_path = rtrim($system_path, DS) . DS;
 
     // Is the system path correct?
     if ( ! is_dir($system_path))
@@ -112,34 +116,34 @@ if ( ! defined('CIUnit_Version') ) {
     define('EXT', '.php');
 
     // Path to the system folder
-    define('BASEPATH', str_replace(array("\\", "/"), DIRECTORY_SEPARATOR, $system_path));
+    define('BASEPATH', str_replace(array("\\", "/"), DS, $system_path));
 
     // Path to the front controller (this file)
     define('FCPATH', str_replace(SELF, '', __FILE__));
 
     // Name of the "system folder"
-    define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
+    define('SYSDIR', trim(strrchr(trim(BASEPATH, DS), DS), DS));
 
 
     // The path to the "application" folder
     if (is_dir($application_folder))
     {
-        define('APPPATH', $application_folder.'/');
+        define('APPPATH', $application_folder . DS);
     }
     else
     {
-        if ( ! is_dir(BASEPATH.$application_folder.'/'))
+        if ( ! is_dir(BASEPATH.$application_folder . DS))
         {
             exit("Your application folder path does not appear to be set correctly. Please open the following file and correct this: ".SELF);
         }
 
-        define('APPPATH', BASEPATH.$application_folder.'/');
+        define('APPPATH', BASEPATH.$application_folder . DS);
     }
 
     // The path to CIUnit
     if (is_dir($ciunit_folder))
     {
-        define('CIUPATH', $ciunit_folder . '/');
+        define('CIUPATH', $ciunit_folder . DS);
     }
     else
     {
@@ -153,7 +157,7 @@ if ( ! defined('CIUnit_Version') ) {
 
 
     // The path to the Tests folder
-    define('TESTSPATH', $tests_folder . '/');
+    define('TESTSPATH', $tests_folder . DS);
 
 /*
  * --------------------------------------------------------------------
@@ -166,7 +170,7 @@ require_once CIUPATH . 'core/CodeIgniter' . EXT;
 
 // Autoload the PHPUnit Framework
 //require_once ('PHPUnit/Autoload.php');
-require_once __DIR__ . DIRECTORY_SEPARATOR . '..'. DIRECTORY_SEPARATOR . '..'. DIRECTORY_SEPARATOR . '..'. DIRECTORY_SEPARATOR. 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+require_once __DIR__ . DS . '..'. DS . '..'. DS . '..'. DS. 'vendor' . DS . 'autoload.php';
 
 
 // Load the CIUnit Framework
