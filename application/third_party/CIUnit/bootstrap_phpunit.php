@@ -8,6 +8,14 @@ if ( ! defined('DS') ) {
     define('DS', DIRECTORY_SEPARATOR);
 }
 
+/**
+ *---------------------------------------------------------------
+ * DEFINE ROOT PATH APPLICATION
+ *---------------------------------------------------------------
+ */
+
+    define('ROOT_PATH', str_replace('application'.DS.'third_party'.DS.'CIUnit', '', dirname(__FILE__)));
+
 /*
  *---------------------------------------------------------------
  * PHP ERROR REPORTING LEVEL
@@ -35,7 +43,7 @@ if ( ! defined('DS') ) {
  * is that the tests folder is in the same directory path as system.  If
  * it is not, update the paths appropriately.
  */
-    $system_path = __DIR__ . DS .'..' . DS . '..' . DS . '..' . DS . 'system';
+    $system_path = ROOT_PATH . 'system';
 
 /*
  *---------------------------------------------------------------
@@ -54,7 +62,7 @@ if ( ! defined('DS') ) {
  * is that the tests folder is in the same directory as the application
  * folder.  If it is not, update the path accordingly.
  */
-    $application_folder = __DIR__ . DS .'..' . DS . '..' . DS . '..' . DS . 'application';
+    $application_folder = ROOT_PATH . 'application';
 
 /**
  * --------------------------------------------------------------
@@ -77,7 +85,7 @@ if ( ! defined('DS') ) {
  *
  * This is the path to the tests folder.
  */
-    $tests_folder = __DIR__ . DS .'..' . DS . '..' . DS . '..' . DS . 'tests';
+    $tests_folder = ROOT_PATH . 'tests';
 
 // --------------------------------------------------------------------
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
@@ -101,7 +109,7 @@ if ( ! defined('DS') ) {
     // Is the system path correct?
     if ( ! is_dir($system_path))
     {
-        exit("Your system folder path does not appear to be set correctly. Please open the following file and correct this: ".pathinfo(__FILE__, PATHINFO_BASENAME));
+        exit(SELF. "\n Your system folder path does not appear to be set correctly. Please open the following file and correct this: ".pathinfo(__FILE__, PATHINFO_BASENAME));
     }
 
 /*
@@ -168,7 +176,7 @@ if ( ! defined('DS') ) {
 require_once CIUPATH . 'core/CodeIgniter' . EXT;
 
 // Autoload the PHPUnit Framework
-require_once __DIR__ . DS . '..'. DS . '..'. DS . '..'. DS. 'vendor' . DS . 'autoload.php';
+require_once ROOT_PATH . 'vendor' . DS . 'autoload.php';
 
 
 // Load the CIUnit Framework
