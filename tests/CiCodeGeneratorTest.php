@@ -62,19 +62,12 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 	public function setUp(){
 		parent::setUp();
 		parent::tearDown();
-
 		//	Setting Models Directory
-		$this->modelsDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR;
-
+		$this->modelsDirectory = __DIR__ . DS . '..' . DS . 'application' . DS . 'models' . DS;
 		//	Setting Views Directory
-		$this->viewsDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR;
-
+		$this->viewsDirectory = __DIR__ . DS . '..' . DS . 'application' . DS . 'views' . DS;
 		//	Setting Controllers Directory
-		$this->controllersDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR;
-
-		$this->deleteFiles($this->viewsDirectory);
-		$this->deleteFiles($this->modelsDirectory);
-		$this->deleteFiles($this->controllersDirectory);
+		$this->controllersDirectory = __DIR__ . DS . '..' . DS . 'application' . DS . 'controllers' . DS;
 	}
 
 	/**
@@ -93,7 +86,10 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		$_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->viewsDirectory) );
 		$this->assertTrue( (bool) file_get_contents($this->viewsDirectory . $this->_args[1] . '.php' ));
-		$this->assertTrue($this->deleteFiles($this->viewsDirectory));
+		//	Removing file generated
+		unlink($this->viewsDirectory . $this->_args[1] . '.php' );
+		//	Verifying if file was deleted
+		$this->assertTrue( !file_exists($this->viewsDirectory . $this->_args[1] . '.php' ));
 	}
 
 	/**
@@ -108,7 +104,6 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 			2 => 'test2',
 			3 => 'test3',
 		);
-		$this->deleteFiles($this->viewsDirectory);
 
 		$_generator =  new CI_Code_Generator();
 		$_generator->run($this->_args);
@@ -118,7 +113,15 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		$this->assertTrue( (bool) file_get_contents($this->viewsDirectory . $this->_args[2] . '.php' ));
 		$this->assertTrue( (bool) file_get_contents($this->viewsDirectory . $this->_args[3] . '.php' ));
 
-		$this->assertTrue($this->deleteFiles($this->viewsDirectory));
+		//	Removing files generateds
+		unlink($this->viewsDirectory . $this->_args[1] . '.php' );
+		unlink($this->viewsDirectory . $this->_args[2] . '.php' );
+		unlink($this->viewsDirectory . $this->_args[3] . '.php' );
+
+		//	Verifying if file was deleted
+		$this->assertTrue( !file_exists($this->viewsDirectory . $this->_args[1] . '.php' ));
+		$this->assertTrue( !file_exists($this->viewsDirectory . $this->_args[2] . '.php' ));
+		$this->assertTrue( !file_exists($this->viewsDirectory . $this->_args[3] . '.php' ));
 	}
 
 
@@ -138,7 +141,12 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		$_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->controllersDirectory) );
 		$this->assertTrue( (bool) file_get_contents($this->controllersDirectory . $this->_args[1] . '.php' ));
-		$this->assertTrue($this->deleteFiles($this->controllersDirectory));
+
+		//	Removing file generated
+		unlink($this->controllersDirectory . $this->_args[1] . '.php');
+
+		//	Verifying if file was deleted
+		$this->assertTrue( !file_exists($this->controllersDirectory . $this->_args[1] . '.php' ));
 	}
 
 	/**
@@ -162,7 +170,12 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		$_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->controllersDirectory) );
 		$this->assertTrue( (bool) file_get_contents($this->controllersDirectory . $this->_args[1] . '.php' ));
-		$this->assertTrue($this->deleteFiles($this->controllersDirectory));
+
+		//	Removing file generated
+		unlink($this->controllersDirectory . $this->_args[1] . '.php');
+
+		//	Verifying if file was deleted
+		$this->assertTrue( !file_exists($this->controllersDirectory . $this->_args[1] . '.php' ));
 	}
 
 	/**
@@ -181,7 +194,12 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		$_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->modelsDirectory) );
 		$this->assertTrue( (bool) file_get_contents($this->modelsDirectory . $this->_args[1] . '.php' ));
-		$this->assertTrue($this->deleteFiles($this->modelsDirectory));
+
+		//	Removing file generated
+		unlink($this->modelsDirectory . $this->_args[1] . '.php');
+
+		//	Verifying if file was deleted
+		$this->assertTrue( !file_exists($this->modelsDirectory . $this->_args[1] . '.php' ));
 	}
 
 	/**
@@ -204,31 +222,20 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		$_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->modelsDirectory) );
 		$this->assertTrue( (bool) file_get_contents($this->modelsDirectory . $this->_args[1] . '.php' ));
-		$this->assertTrue($this->deleteFiles($this->modelsDirectory));
-	}
 
-    /**
-     * Exclui todos os arquivos contidos no caminho do diretório fornecido.
-     * Os arquivos devem ter permissão de escrita ou de propriedade do sistema, a fim de ser excluído.
-     *
-     * @access protected
-     * @param $path = diretorio onde encontra-se o(s) arquivo(s)
-     *
-     * @return bool
-     */
-    protected function deleteFiles($path = NULL) {
-    	return TRUE;
-    }
+		//	Removing file generated
+		unlink($this->modelsDirectory . $this->_args[1] . '.php');
+
+		//	Verifying if file was deleted
+		$this->assertTrue( !file_exists($this->modelsDirectory . $this->_args[1] . '.php' ));
+	}
 
     /**
      * Tear down of test
      *
      * @return type
      */
-	public function tearDown(){
-		$this->deleteFiles($this->viewsDirectory);
-		$this->deleteFiles($this->modelsDirectory);
-	}
+	public function tearDown() {}
 
 }
 
