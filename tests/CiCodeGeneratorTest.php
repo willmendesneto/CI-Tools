@@ -68,6 +68,10 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		$this->viewsDirectory = __DIR__ . DS . '..' . DS . 'application' . DS . 'views' . DS;
 		//	Setting Controllers Directory
 		$this->controllersDirectory = __DIR__ . DS . '..' . DS . 'application' . DS . 'controllers' . DS;
+
+		$CI =& get_instance();
+		$CI->load->library('CI_Code_Generator');
+		$this->_generator =  new CI_Code_Generator();
 	}
 
 	/**
@@ -81,9 +85,8 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 			1 => 'test'
 		);
 
-
-		$_generator =  new CI_Code_Generator();
-		$_generator->run($this->_args);
+		//$_generator =  new CI_Code_Generator();
+		$this->_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->viewsDirectory) );
 		$this->assertTrue( file_exists($this->viewsDirectory . $this->_args[1] . '.php' ));
 		//	Removing file generated
@@ -105,8 +108,8 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 			3 => 'test3',
 		);
 
-		$_generator =  new CI_Code_Generator();
-		$_generator->run($this->_args);
+		//$_generator =  new CI_Code_Generator();
+		$this->_generator->run($this->_args);
 		$this->assertTrue(is_dir($this->viewsDirectory));
 
 		$this->assertTrue( file_exists($this->viewsDirectory . $this->_args[1] . '.php' ));
@@ -137,8 +140,8 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		);
 
 
-		$_generator =  new CI_Code_Generator();
-		$_generator->run($this->_args);
+		//$_generator =  new CI_Code_Generator();
+		$this->_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->controllersDirectory) );
 		$this->assertTrue( file_exists($this->controllersDirectory . $this->_args[1] . '.php' ));
 
@@ -166,8 +169,8 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		);
 
 
-		$_generator =  new CI_Code_Generator();
-		$_generator->run($this->_args);
+		//$_generator =  new CI_Code_Generator();
+		$this->_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->controllersDirectory) );
 		$this->assertTrue( file_exists($this->controllersDirectory . $this->_args[1] . '.php' ));
 
@@ -190,8 +193,8 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		);
 
 
-		$_generator =  new CI_Code_Generator();
-		$_generator->run($this->_args);
+		//$_generator =  new CI_Code_Generator();
+		$this->_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->modelsDirectory) );
 		$this->assertTrue( file_exists($this->modelsDirectory . $this->_args[1] . '.php' ));
 
@@ -218,8 +221,8 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		);
 
 
-		$_generator =  new CI_Code_Generator();
-		$_generator->run($this->_args);
+		//$_generator =  new CI_Code_Generator();
+		$this->_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->modelsDirectory) );
 		$this->assertTrue( file_exists($this->modelsDirectory . $this->_args[1] . '.php' ));
 
