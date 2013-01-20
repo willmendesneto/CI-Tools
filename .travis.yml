@@ -1,13 +1,12 @@
 language: php
-script: php vendor/phpunit/phpunit/composer/bin/phpunit -c tests/phpunit.xml --verbose --coverage-text tests/
+script: vendor/bin/phpunit -c tests/phpunit.xml --verbose --coverage-text tests/
 
 php:
-  - 5.3
-  - 5.4
+	- 5.3
+  	- 5.4
 
 before_script:
-  - "curl -s http://getcomposer.org/installer | php"
-  - "php composer.phar install -v"
+    - "composer install --dev --verbose"
 
 after_script:
   - "php vendor/phpunit/phpunit/composer/bin/phpunit -c tests/phpunit.xml --testdox tests/"
