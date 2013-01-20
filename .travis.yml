@@ -1,9 +1,10 @@
 language: php
-script: php vendor/bin/phpunit -c tests/phpunit.xml --verbose --coverage-text tests/
 
 php:
 	- 5.3
   	- 5.4
+
+script: php vendor/bin/phpunit -c tests/phpunit.xml --verbose --coverage-text tests/
 
 before_script:
     - "composer install --dev --verbose"
