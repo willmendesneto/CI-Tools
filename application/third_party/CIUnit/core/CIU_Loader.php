@@ -20,7 +20,7 @@
 class CIU_Loader extends CI_Loader {
 
     var $_ci_loaded_files = array();
-    
+
     /**
      * Load class
      *
@@ -192,7 +192,7 @@ class CIU_Loader extends CI_Loader {
         $CI =& get_instance();
         if ($config !== NULL)
         {
-            if (!defined('CIUnit_Version'))
+            if (!defined('CIUNIT_VERSION'))
             {
                 $CI->$classvar = new $name($config);
             }
@@ -204,7 +204,7 @@ class CIU_Loader extends CI_Loader {
         }
         else
         {
-            if (!defined('CIUnit_Version'))
+            if (!defined('CIUNIT_VERSION'))
             {
                 $CI->$classvar = new $name;
             }
@@ -214,12 +214,12 @@ class CIU_Loader extends CI_Loader {
                 $CI->$classvar = new $name($config);
             }
         }
-        
+
         $this->_ci_classes[$class] = $classvar;
     }
-    
+
     // --------------------------------------------------------------------
-    
+
     /**
      * Autoloader
      *
@@ -302,7 +302,7 @@ class CIU_Loader extends CI_Loader {
 
     }
     */
-    
+
    /*
     * Can load a view file from an absolute path and
     * relative to the CodeIgniter index.php file

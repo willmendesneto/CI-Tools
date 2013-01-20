@@ -16,7 +16,7 @@ class Fixture {
     function __construct()
     {
         //security measure 1: only load if CIUnit is loaded
-        if (! defined('CIUnit_Version') )
+        if (! defined('CIUNIT_VERSION') )
         {
             exit('can\'t load fixture library class when not in test mode!');
         }
@@ -28,7 +28,7 @@ class Fixture {
     function load($table, $fixt)
     {
         $this->_assign_db();
-		
+
         // $fixt is supposed to be an associative array
         // E.g. outputted by spyc from reading a YAML file
         $this->CI->db->simple_query('truncate table ' . $table . ';');
@@ -52,20 +52,20 @@ class Fixture {
         log_message('debug',
             "Data fixture for db table '$table' loaded - $nbr_of_rows rows");
     }
-    
+
     public function unload($table)
     {
         $this->_assign_db();
-        
+
         $Q = $this->CI->db->simple_query('truncate table ' . $table . ';');
-        
+
         if (!$Q) {
             echo $this->CI->db->call_function('error', $this->CI->db->conn_id);
             echo "\n";
             echo "Failed to truncate the table ".$table."\n\n";
         }
     }
-    
+
 
     private function _assign_db()
     {

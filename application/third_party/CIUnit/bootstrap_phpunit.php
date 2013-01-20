@@ -1,7 +1,7 @@
 <?php
 
-if ( ! defined('CIUnit_Version') ) {
-    define('CIUnit_Version', 0.17);
+if ( ! defined('CIUNIT_VERSION') ) {
+    define('CIUNIT_VERSION', 0.17);
 }
 
 if ( ! defined('DS') ) {
@@ -177,7 +177,6 @@ require_once CIUPATH . 'core/CodeIgniter' . EXT;
 
 // Autoload the PHPUnit Framework
 require_once ROOT_PATH . 'vendor' . DS . 'autoload.php';
-
 
 // Load the CIUnit Framework
 require_once CIUPATH. 'libraries/CIUnit.php';

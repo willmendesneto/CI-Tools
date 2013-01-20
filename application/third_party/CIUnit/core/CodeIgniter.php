@@ -248,7 +248,7 @@
         require APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller'.EXT;
     }
 
-    if (defined('CIUnit_Version') === false) {
+    if (defined('CIUNIT_VERSION') === false) {
 
         // Load the local application controller
         // Note: The Router class automatically validates the controller path using the router->_validate_request().
