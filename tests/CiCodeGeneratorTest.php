@@ -15,6 +15,7 @@
  */
 
 require_once dirname(__FILE__) . '/../application/third_party/CIUnit/bootstrap_phpunit.php';
+require_once dirname(__FILE__) . '/../application/libraries/CI_Code_Generator/CI_Code_Generator.php';
 
 class CiCodeGeneratorTest extends CIUnit_TestCase {
 
@@ -74,12 +75,6 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		$this->deleteFiles($this->viewsDirectory);
 		$this->deleteFiles($this->modelsDirectory);
 		$this->deleteFiles($this->controllersDirectory);
-
-        $CI = new $class();
-
-        $GLOBALS['CI'] =& $CI;
-
-		$CI->load->library('CI_Code_Generator');
 		$this->_generator =  new CI_Code_Generator();
 	}
 
