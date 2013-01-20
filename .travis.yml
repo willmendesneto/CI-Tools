@@ -7,7 +7,7 @@ php:
 
 before_script:
   - "curl -s http://getcomposer.org/installer | php"
-  - "php composer.phar install"
+  - "php composer.phar install -v"
 
 after_script:
   - "php vendor/phpunit/phpunit/composer/bin/phpunit -c tests/phpunit.xml --testdox tests/"

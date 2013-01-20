@@ -1,5 +1,6 @@
 {
     "require": {
-		"phpunit/phpunit": "*"
+		"phpunit/phpunit": "3.7@stable",
+		"squizlabs/php_codesniffer": "dev-master"
     }
 }
