@@ -1,4 +1,5 @@
 language: php
+script: php vendor/bin/phpunit -c tests/phpunit.xml --verbose --coverage-text tests/
 
 php:
 	- 5.3
@@ -8,7 +9,7 @@ script: php vendor/bin/phpunit -c tests/phpunit.xml --verbose --coverage-text te
 
 before_script:
 	- "curl -s http://getcomposer.org/installer | php"
-    - "php composer.phar install --dev --verbose"
+    - "php composer.phar --dev install"
 
 after_script:
   - "php vendor/bin/phpunit -c tests/phpunit.xml --testdox tests/"
