@@ -13,6 +13,9 @@
  * @version     0.1
  * @since       January 17, 2013
  */
+
+require_once dirname(__FILE__) . '/../application/third_party/CIUnit/bootstrap_phpunit.php';
+
 class CiCodeGeneratorTest extends CIUnit_TestCase {
 
 	/**
