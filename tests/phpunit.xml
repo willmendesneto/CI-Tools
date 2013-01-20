@@ -16,11 +16,6 @@
             <directory>.</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist>
-            <directory>../application/libraries/CI_Code_Generator</directory>
-        </whitelist>
-    </filter>
 </phpunit>
 
 
