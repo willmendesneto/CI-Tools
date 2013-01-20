@@ -69,8 +69,6 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		//	Setting Controllers Directory
 		$this->controllersDirectory = __DIR__ . DS . '..' . DS . 'application' . DS . 'controllers' . DS;
 
-		$CI =& get_instance();
-		$CI->load->library('CI_Code_Generator');
 		$this->_generator =  new CI_Code_Generator();
 	}
 
