@@ -75,7 +75,10 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		$this->deleteFiles($this->modelsDirectory);
 		$this->deleteFiles($this->controllersDirectory);
 
-		$CI =& get_instance();
+        $CI = new $class();
+
+        $GLOBALS['CI'] =& $CI;
+
 		$CI->load->library('CI_Code_Generator');
 		$this->_generator =  new CI_Code_Generator();
 	}
