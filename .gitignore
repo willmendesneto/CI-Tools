@@ -9,8 +9,6 @@ application/.htaccess
 application/index.html
 application/cache/*
 
-application/controllers/*
-application/views/*
 application/core/*
 application/errors/*
 application/helpers/*
@@ -18,7 +16,6 @@ application/hooks/*
 application/language/*
 application/libraries/index.html
 application/logs/*
-application/models/*
 application/third_party/index.html
 
 index.php
