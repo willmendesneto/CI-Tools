@@ -133,7 +133,7 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 	public function test_generatorController(){
 		$this->_args = array(
 			0 => 'generator:controller',
-			1 => 'test_controller'
+			1 => 'Test_controller'
 		);
 
 
@@ -157,7 +157,7 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 	public function test_generatorControllerWithMethods(){
 		$this->_args = array(
 			0 => 'generator:controller',
-			1 => 'test_with_methods_controller',
+			1 => 'Test_with_methods_controller',
 			2 => 'index',
 			3 => 'viewInfoTest',
 			4 => 'insertInfoTest',
@@ -186,7 +186,7 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 	public function test_generatorModel(){
 		$this->_args = array(
 			0 => 'generator:model',
-			1 => 'test_model'
+			1 => 'Test_model'
 		);
 
 
@@ -210,7 +210,7 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 	public function test_generatorModelWithMethods(){
 		$this->_args = array(
 			0 => 'generator:model',
-			1 => 'test_with_methods_model',
+			1 => 'Test_with_methods_model',
 			2 => 'getInfoTest',
 			3 => 'insertInfoTest',
 			4 => 'updateInfoTest',
