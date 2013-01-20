@@ -75,7 +75,6 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		$this->deleteFiles($this->viewsDirectory);
 		$this->deleteFiles($this->modelsDirectory);
 		$this->deleteFiles($this->controllersDirectory);
-		$this->_generator =  new CI_Code_Generator();
 	}
 
 	/**
@@ -89,7 +88,9 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 			1 => 'test'
 		);
 
-		$this->_generator->run($this->_args);
+
+		$_generator =  new CI_Code_Generator();
+		$_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->viewsDirectory) );
 		$this->assertTrue( (bool) file_get_contents($this->viewsDirectory . $this->_args[1] . '.php' ));
 		$this->assertTrue($this->deleteFiles($this->viewsDirectory));
@@ -109,7 +110,8 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 		);
 		$this->deleteFiles($this->viewsDirectory);
 
-		$this->_generator->run($this->_args);
+		$_generator =  new CI_Code_Generator();
+		$_generator->run($this->_args);
 		$this->assertTrue(is_dir($this->viewsDirectory));
 
 		$this->assertTrue( (bool) file_get_contents($this->viewsDirectory . $this->_args[1] . '.php' ));
@@ -131,7 +133,9 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 			1 => 'test_controller'
 		);
 
-		$this->_generator->run($this->_args);
+
+		$_generator =  new CI_Code_Generator();
+		$_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->controllersDirectory) );
 		$this->assertTrue( (bool) file_get_contents($this->controllersDirectory . $this->_args[1] . '.php' ));
 		$this->assertTrue($this->deleteFiles($this->controllersDirectory));
@@ -153,7 +157,9 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 			6 => 'deleteInfoTest'
 		);
 
-		$this->_generator->run($this->_args);
+
+		$_generator =  new CI_Code_Generator();
+		$_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->controllersDirectory) );
 		$this->assertTrue( (bool) file_get_contents($this->controllersDirectory . $this->_args[1] . '.php' ));
 		$this->assertTrue($this->deleteFiles($this->controllersDirectory));
@@ -170,7 +176,9 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 			1 => 'test_model'
 		);
 
-		$this->_generator->run($this->_args);
+
+		$_generator =  new CI_Code_Generator();
+		$_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->modelsDirectory) );
 		$this->assertTrue( (bool) file_get_contents($this->modelsDirectory . $this->_args[1] . '.php' ));
 		$this->assertTrue($this->deleteFiles($this->modelsDirectory));
@@ -191,7 +199,9 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 			5 => 'deleteInfoTest'
 		);
 
-		$this->_generator->run($this->_args);
+
+		$_generator =  new CI_Code_Generator();
+		$_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->modelsDirectory) );
 		$this->assertTrue( (bool) file_get_contents($this->modelsDirectory . $this->_args[1] . '.php' ));
 		$this->assertTrue($this->deleteFiles($this->modelsDirectory));
