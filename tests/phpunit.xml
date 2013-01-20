@@ -11,6 +11,11 @@
     cacheTokens="true"
     verbose="false"
     bootstrap="../application/third_party/CIUnit/bootstrap_phpunit.php">
+    <testsuites>
+        <testsuite name="CI-Code-Generator Test Suite">
+            <directory>.</directory>
+        </testsuite>
+    </testsuites>
     <filter>
         <whitelist>
             <directory>../application/libraries/CI_Code_Generator</directory>
