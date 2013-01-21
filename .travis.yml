@@ -6,8 +6,8 @@ php:
   - 5.4
 
 before_script:
-  - "git clone --branch=developer --depth=100 --quiet git://github.com/EllisLab/CodeIgniter.git willmendesneto/codeigniter"
-  - "cp -R willmendesneto/codeigniter/ ../"
+  - "git clone git://github.com/EllisLab/CodeIgniter.git codeigniter"
+  - "cp -R willmendesneto/codeigniter/* ../willmendesneto/"
   - "rm -rf codeigniter"
   - "curl -s http://getcomposer.org/installer | php"
   - "php composer.phar --dev install"
