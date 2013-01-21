@@ -6,9 +6,9 @@ php:
   - 5.4
 
 before_script:
-  - "git clone git://github.com/EllisLab/CodeIgniter.git codeigniter"
-  - "cp -R codeigniter/* ../"
-  - "rm -rf codeigniter"
+  - "git clone git://github.com/EllisLab/CodeIgniter.git CI-Code-Generator"
+  - "cp -R CI-Code-Generator/* ../"
+  - "rm -rf CI-Code-Generator"
   - "curl -s http://getcomposer.org/installer | php"
   - "php composer.phar --dev install"
 
