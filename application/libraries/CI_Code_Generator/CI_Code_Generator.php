@@ -95,7 +95,6 @@ class CI_Code_Generator
         $this->$method(array_slice($arguments, 1));
     }
 
-
     /**
      * Parse the task name to extract the bundle, task, and method.
      *
@@ -115,7 +114,6 @@ class CI_Code_Generator
 
         return array($task, $method);
     }
-
 
     /**
      * Methods aliases
@@ -144,7 +142,6 @@ generator:assets [asset]
 \n=====================  END  ====================\n
 EOT;
     }
-
 
     /**
      * Generator a controller file with optional actions.
