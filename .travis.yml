@@ -7,7 +7,7 @@ php:
 
 before_script:
   - "git clone git://github.com/EllisLab/CodeIgniter.git codeigniter"
-  - "cp -R willmendesneto/codeigniter/* ../willmendesneto/"
+  - "cp -R codeigniter/* ../"
   - "rm -rf codeigniter"
   - "curl -s http://getcomposer.org/installer | php"
   - "php composer.phar --dev install"
