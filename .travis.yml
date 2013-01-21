@@ -9,6 +9,7 @@ before_script:
   - "git clone git://github.com/EllisLab/CodeIgniter.git CI-Code-Generator"
   - "cp -R CI-Code-Generator/* ../"
   - "rm -rf CI-Code-Generator"
+  - "ls"
   - "curl -s http://getcomposer.org/installer | php"
   - "php composer.phar --dev install"
 
