@@ -109,7 +109,7 @@ if ( ! defined('DS') ) {
     // Is the system path correct?
     if ( ! is_dir($system_path))
     {
-        exit(SELF. "\n Your system folder path does not appear to be set correctly. Please open the following file and correct this: ".pathinfo(__FILE__, PATHINFO_BASENAME));
+        exit("Your system folder path does not appear to be set correctly. Please open the following file and correct this: ".pathinfo(__FILE__, PATHINFO_BASENAME));
     }
 
 /*
