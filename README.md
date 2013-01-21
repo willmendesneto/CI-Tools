@@ -5,7 +5,6 @@ A code generator console for Codeigniter Framework. Based in other code generato
 * Artisan (Laravel Framework)
 * Bake (CakePHP)
 
-
 ## How to use
 
 1 Put in your project. You can:
