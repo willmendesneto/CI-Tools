@@ -7,7 +7,7 @@ php:
 
 before_script:
   - "git clone git://github.com/EllisLab/CodeIgniter.git willmendesneto/CI-Code-Generator/codeigniter"
-  - "cp -R willmendesneto/CI-Code-Generator/codeigniter/* ../willmendesneto/CI-Code-Generator/"
+  - "cp -R willmendesneto/CI-Code-Generator/codeigniter/* willmendesneto/CI-Code-Generator/"
   - "rm -rf willmendesneto/CI-Code-Generator/codeigniter"
   - "ls"
   - "curl -s http://getcomposer.org/installer | php"
