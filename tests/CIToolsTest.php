@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests of CiCodeGeneratorTest librarie
+ * Tests of CIToolsTest librarie
  *
  * Run the phpunit with command
  *
@@ -10,16 +10,16 @@
  *
  * @author      Wilson Mendes Neto <willmendesneto@gmail.com>
  * @license     Nops!
- * @version     0.1
- * @since       January 17, 2013
+ * @version     0.2
+ * @since       January 25, 2013
  */
 
-class CiCodeGeneratorTest extends PHPUnit_Framework_TestCase {
+class CIToolsTest extends PHPUnit_Framework_TestCase {
 
     private $CI;
 
 	/**
-	 * Dependency injection with CI_Code_Generator class
+	 * Dependency injection with \CITools\Service\CITools() class
 	 *
 	 *	@var object
 	 */
@@ -62,7 +62,7 @@ class CiCodeGeneratorTest extends PHPUnit_Framework_TestCase {
 		parent::setUp();
 		parent::tearDown();
 
-        $this->CI = &get_instance();
+        //$this->CI = &get_instance();
 
 		//	Setting Models Directory
 		$this->modelsDirectory = __DIR__ . DS . '..' . DS . 'application' . DS . 'models' . DS;
@@ -71,7 +71,7 @@ class CiCodeGeneratorTest extends PHPUnit_Framework_TestCase {
 		//	Setting Controllers Directory
 		$this->controllersDirectory = __DIR__ . DS . '..' . DS . 'application' . DS . 'controllers' . DS;
 
-		$this->_generator =  new CI_Code_Generator();
+		$this->_generator =  new \CITools\Service\CITools();
 	}
 
 	/**
@@ -85,7 +85,7 @@ class CiCodeGeneratorTest extends PHPUnit_Framework_TestCase {
 			1 => 'test'
 		);
 
-		//$_generator =  new CI_Code_Generator();
+		//$_generator =  new \CITools\Service\CITools()();
 		$this->_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->viewsDirectory) );
 		$this->assertTrue( file_exists($this->viewsDirectory . $this->_args[1] . '.php' ));
@@ -108,7 +108,7 @@ class CiCodeGeneratorTest extends PHPUnit_Framework_TestCase {
 			3 => 'test3',
 		);
 
-		//$_generator =  new CI_Code_Generator();
+		//$_generator =  new \CITools\Service\CITools()();
 		$this->_generator->run($this->_args);
 		$this->assertTrue(is_dir($this->viewsDirectory));
 
@@ -140,7 +140,7 @@ class CiCodeGeneratorTest extends PHPUnit_Framework_TestCase {
 		);
 
 
-		//$_generator =  new CI_Code_Generator();
+		//$_generator =  new \CITools\Service\CITools()();
 		$this->_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->controllersDirectory) );
 		$this->assertTrue( file_exists($this->controllersDirectory . $this->_args[1] . '.php' ));
@@ -169,7 +169,7 @@ class CiCodeGeneratorTest extends PHPUnit_Framework_TestCase {
 		);
 
 
-		//$_generator =  new CI_Code_Generator();
+		//$_generator =  new \CITools\Service\CITools()();
 		$this->_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->controllersDirectory) );
 		$this->assertTrue( file_exists($this->controllersDirectory . $this->_args[1] . '.php' ));
@@ -193,7 +193,7 @@ class CiCodeGeneratorTest extends PHPUnit_Framework_TestCase {
 		);
 
 
-		//$_generator =  new CI_Code_Generator();
+		//$_generator =  new \CITools\Service\CITools()();
 		$this->_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->modelsDirectory) );
 		$this->assertTrue( file_exists($this->modelsDirectory . $this->_args[1] . '.php' ));
@@ -221,7 +221,7 @@ class CiCodeGeneratorTest extends PHPUnit_Framework_TestCase {
 		);
 
 
-		//$_generator =  new CI_Code_Generator();
+		//$_generator =  new \CITools\Service\CITools()();
 		$this->_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->modelsDirectory) );
 		$this->assertTrue( file_exists($this->modelsDirectory . $this->_args[1] . '.php' ));

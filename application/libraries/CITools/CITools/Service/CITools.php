@@ -9,6 +9,9 @@ use CITools\Template\CodeigniterTemplate;
 class CITools
 {
 
+
+    public static $appDir;
+
     /**
      * Folder "assets" localization
      *
@@ -81,18 +84,20 @@ class CITools
      */
     public function run(array $arguments){
 
+        self::$appDir = CodeigniterTemplate::getApplicationDirectory();
+
         if ( ! isset($arguments[0]))
-            throw new Exception("Please choice a option.\n" . $this->help());
+            throw new \Exception("Please choice a option.\n" . $this->help());
 
         list($task, $method) = $this->parse($arguments[0]);
         // Once the bundle has been resolved, we'll make sure we could actually
         // find that task, and then verify that the method exists on the task
         // so we can successfully call it without a problem.
         if (is_null($task))
-            throw new Exception("Sorry, I can't find that task.");
+            throw new \Exception("Sorry, I can't find that task.");
 
         if ( !is_callable(array($this, $method)) )
-            throw new Exception("Sorry, I can't find that method!");
+            throw new \Exception("Sorry, I can't find that method!");
 
         $this->$method(array_slice($arguments, 1));
     }
@@ -159,14 +164,14 @@ EOT;
     public function controller($args)
     {
         if ( empty($args) ) {
-            throw new Exception("Error: Please supply a class name, and your desired methods.\n");
+            throw new \Exception("Error: Please supply a class name, and your desired methods.\n");
         }
 
         // Name of the class and file
         $class_name = ucwords(array_shift($args));
 
         // Where will this file be stored?
-        $file_path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'controllers'. DIRECTORY_SEPARATOR . "$class_name.php";
+        $file_path = __DIR__ . self::$appDir . 'controllers'. DIRECTORY_SEPARATOR . "$class_name.php";
 
         // Begin building up the file's content
         self::$content = CodeigniterTemplate::generatorClass($class_name, 'CI_Controller');
@@ -202,7 +207,7 @@ EOT;
         // Name of the class and file
         $class_name = ucwords(array_shift($args));
 
-        $file_path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'models'. DIRECTORY_SEPARATOR . str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $class_name) . '.php';
+        $file_path = __DIR__ . self::$appDir . 'models'. DIRECTORY_SEPARATOR . str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $class_name) . '.php';
 
         // Begin building up the file's content
         self::$content = CodeigniterTemplate::generatorClass($class_name, 'CI_Model');
@@ -234,11 +239,11 @@ EOT;
     public function view($paths)
     {
         if ( empty($paths) ) {
-            throw new Exception("Warning: no views were specified. Add some!\n");
+            throw new \Exception("Warning: no views were specified. Add some!\n");
         }
 
         foreach( $paths as $path ) {
-            $file_path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'views'. DIRECTORY_SEPARATOR . str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $path) . '.php';
+            $file_path = __DIR__ . self::$appDir . 'views'. DIRECTORY_SEPARATOR . str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $path) . '.php';
 
             self::$content = "This is the $file_path view";
             $this->write_to_file($file_path);
@@ -259,7 +264,7 @@ EOT;
 
         if ( file_exists($file_path) ) {
             // we don't want to overwrite it
-            throw new Exception("Warning: File already exists at $file_path\n");
+            throw new \Exception("Warning: File already exists at $file_path\n");
         }
 
         // As a precaution, let's see if we need to make the folder.
@@ -393,53 +398,6 @@ EOT;
     {
        self::$content = file_get_contents(static::$external_assets[$url]);
        return self::$content;
-    }
-
-}
-
-
-/**
- * Class Template
- *
- * @package default
- */
-class Template {
-
-    public static function generatorFunction($func_name)
-    {
-        return <<<EOT
-
-    /**
-     * Description
-     * @return type
-     */
-    public function {$func_name}()
-    {
-        //  Insert code here!
-    }
-
-EOT;
-    }
-
-    /**
-     * Generator class with your extended class
-     * @param string $name
-     * @param string $extends_class
-     * @return type
-     */
-    public static function generatorClass($name, $extends_class = null)
-    {
-        $content = "
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-class $name";
-        if ( !empty($extends_class) ) {
-            $content .= " extends $extends_class";
-        }
-
-        $content .= ' {}';
-
-        return $content;
     }
 
 }

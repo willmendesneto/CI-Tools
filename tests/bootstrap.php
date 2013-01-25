@@ -34,6 +34,9 @@ if (!is_dir($system_path)) {
  *  Now that we know the path, set the main path constants
  * -------------------------------------------------------------------
  */
+
+define('DS', DIRECTORY_SEPARATOR);
+
 // The name of THIS file
 define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 
@@ -76,7 +79,15 @@ else
 
     define ('VIEWPATH', APPPATH . 'views/');
 }
-error_reporting(-1);
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE CITOOLS BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ */
+
+require_once APPPATH . 'libraries/CITools/bootstrap.php';
 
 /*
  * --------------------------------------------------------------------
@@ -86,7 +97,8 @@ error_reporting(-1);
  * And away we go...
  *
  */
-require_once BASEPATH . 'core/CodeIgniter.php';
 
-/* End of file index.php */
-/* Location: ./index.php */
+//  require_once BASEPATH . 'core/CodeIgniter.php';
+
+/* End of file bootstrap.php */
+/* Location: .//D/projects/ci-code-generator/tests/bootstrap.php */

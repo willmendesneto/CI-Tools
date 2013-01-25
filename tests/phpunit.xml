@@ -12,7 +12,7 @@
     verbose="false"
     bootstrap="bootstrap.php">
     <testsuites>
-        <testsuite name="CI-Code-Generator Test Suite">
+        <testsuite name="Test Suite">
             <directory>.</directory>
         </testsuite>
     </testsuites>
