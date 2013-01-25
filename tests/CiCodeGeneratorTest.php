@@ -14,10 +14,9 @@
  * @since       January 17, 2013
  */
 
-require_once dirname(__FILE__) . '/../application/third_party/CIUnit/bootstrap_phpunit.php';
-require_once dirname(__FILE__) . '/../application/libraries/CI_Code_Generator/CI_Code_Generator.php';
+class CiCodeGeneratorTest extends PHPUnit_Framework_TestCase {
 
-class CiCodeGeneratorTest extends CIUnit_TestCase {
+    private $CI;
 
 	/**
 	 * Dependency injection with CI_Code_Generator class
@@ -62,6 +61,9 @@ class CiCodeGeneratorTest extends CIUnit_TestCase {
 	public function setUp(){
 		parent::setUp();
 		parent::tearDown();
+
+        $this->CI = &get_instance();
+
 		//	Setting Models Directory
 		$this->modelsDirectory = __DIR__ . DS . '..' . DS . 'application' . DS . 'models' . DS;
 		//	Setting Views Directory

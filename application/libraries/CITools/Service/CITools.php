@@ -1,10 +1,12 @@
 <?php
 
-namespace CITools;
+namespace CITools\Service;
+
+use CITools\Template\Adapter\TemplateInterface;
 
 use CITools\Template\CodeigniterTemplate;
 
-class CI_Code_Generator
+class CITools
 {
 
     /**
@@ -167,11 +169,11 @@ EOT;
         $file_path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'controllers'. DIRECTORY_SEPARATOR . "$class_name.php";
 
         // Begin building up the file's content
-        self::$content = \CodeigniterTemplate::generatorClass($class_name, 'CI_Controller');
+        self::$content = CodeigniterTemplate::generatorClass($class_name, 'CI_Controller');
         $content = '';
         // Now we filter through the args, and create the funcs.
         foreach($args as $method) {
-            $content .= \CodeigniterTemplate::generatorFunction("{$method}");
+            $content .= CodeigniterTemplate::generatorFunction("{$method}");
         }
 
         // Add methods/actions to class.
@@ -203,11 +205,11 @@ EOT;
         $file_path = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'models'. DIRECTORY_SEPARATOR . str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $class_name) . '.php';
 
         // Begin building up the file's content
-        self::$content = \CodeigniterTemplate::generatorClass($class_name, 'CI_Model');
+        self::$content = CodeigniterTemplate::generatorClass($class_name, 'CI_Model');
         $content = '';
         // Now we filter through the args, and create the funcs.
         foreach($args as $method) {
-            $content .= \CodeigniterTemplate::generatorFunction("{$method}");
+            $content .= CodeigniterTemplate::generatorFunction("{$method}");
         }
 
         // Add methods/actions to class.

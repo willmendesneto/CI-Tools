@@ -10,7 +10,7 @@
     syntaxCheck="false"
     cacheTokens="true"
     verbose="false"
-    bootstrap="../application/third_party/CIUnit/bootstrap_phpunit.php">
+    bootstrap="bootstrap.php">
     <testsuites>
         <testsuite name="CI-Code-Generator Test Suite">
             <directory>.</directory>

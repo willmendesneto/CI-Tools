@@ -14,13 +14,13 @@ if ( ! defined('CITOOLS_DIR') ) {
 
 require CITOOLS_DIR . 'bootstrap.php';
 
-namespace CITools;
+//namespace CITools;
 
-use CITools\CI_Code_Generator;
+//use CITools\CI_Code_Generator;
 
 try
 {
-	$generate = new CITools\CI_Code_Generator();
+	$generate = new \CITools\Service\CITools();
 	$generate->run(array_slice($argv, 1));
 }
 catch (\Exception $e)
