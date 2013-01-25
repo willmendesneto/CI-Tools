@@ -1,0 +1,31 @@
+<?php
+
+// --------------------------------------------------------------
+// Launch the CI Code Generator.
+// --------------------------------------------------------------
+
+if ( ! defined('DS') ) {
+    define('DS', DIRECTORY_SEPARATOR);
+}
+
+if ( ! defined('CITOOLS_DIR') ) {
+    define('CITOOLS_DIR', __DIR__ . '/application/libraries/CITools/');
+}
+
+require CITOOLS_DIR . 'bootstrap.php';
+
+namespace CITools;
+
+use CITools\CI_Code_Generator;
+
+try
+{
+	$generate = new CITools\CI_Code_Generator();
+	$generate->run(array_slice($argv, 1));
+}
+catch (\Exception $e)
+{
+	echo $e->getMessage();
+}
+
+echo PHP_EOL;

@@ -4,12 +4,20 @@
 .project
 
 vendor/*
+user_guide/*
+system/*
 
 application/.htaccess
 application/index.html
 application/cache/*
+application/controllers/index.html
+application/controllers/welcome.php
+application/models/index.html
+application/views/index.html
+application/views/welcome_message.php
 
 application/core/*
+application/config/*
 application/errors/*
 application/helpers/*
 application/hooks/*
