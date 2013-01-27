@@ -1,5 +1,5 @@
 language: php
-script: php vendor/phpunit/phpunit/composer/bin/phpunit -c tests/phpunit.xml --verbose --coverage-text tests/CiCodeGeneratorTest.php
+script: php vendor/phpunit/phpunit/composer/bin/phpunit --verbose --coverage-text
 
 php:
   - 5.3
@@ -13,4 +13,4 @@ before_script:
   - "php composer.phar --dev install"
 
 after_script:
-  - "php vendor/phpunit/phpunit/composer/bin/phpunit -c tests/phpunit.xml --testdox tests/CiCodeGeneratorTest.php"
+  - "php vendor/phpunit/phpunit/composer/bin/phpunit --testdox"

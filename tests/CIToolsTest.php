@@ -65,11 +65,11 @@ class CIToolsTest extends PHPUnit_Framework_TestCase {
         //$this->CI = &get_instance();
 
 		//	Setting Models Directory
-		$this->modelsDirectory = __DIR__ . DS . '..' . DS . 'application' . DS . 'models' . DS;
+		$this->modelsDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR;
 		//	Setting Views Directory
-		$this->viewsDirectory = __DIR__ . DS . '..' . DS . 'application' . DS . 'views' . DS;
+		$this->viewsDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR;
 		//	Setting Controllers Directory
-		$this->controllersDirectory = __DIR__ . DS . '..' . DS . 'application' . DS . 'controllers' . DS;
+		$this->controllersDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR;
 
 		$this->_generator =  new \CITools\Service\CITools();
 	}
@@ -116,7 +116,7 @@ class CIToolsTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue( file_exists($this->viewsDirectory . $this->_args[2] . '.php' ));
 		$this->assertTrue( file_exists($this->viewsDirectory . $this->_args[3] . '.php' ));
 
-		//	Removing files generateds
+		//	Removing files generateDIRECTORY_SEPARATOR
 		unlink($this->viewsDirectory . $this->_args[1] . '.php' );
 		unlink($this->viewsDirectory . $this->_args[2] . '.php' );
 		unlink($this->viewsDirectory . $this->_args[3] . '.php' );
@@ -153,7 +153,7 @@ class CIToolsTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Testing generator Controller File With Methods
+	 * Testing generator Controller File With MethoDIRECTORY_SEPARATOR
 	 *
 	 * @return void
 	 */
@@ -206,7 +206,7 @@ class CIToolsTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Testing generator Controller File With Methods
+	 * Testing generator Controller File With MethoDIRECTORY_SEPARATOR
 	 *
 	 * @return void
 	 */
