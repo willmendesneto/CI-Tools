@@ -8,9 +8,9 @@ php:
 before_script:
   - "git clone --branch=master git://github.com/EllisLab/CodeIgniter.git /home/travis/builds/willmendesneto/CI-Code-Generator/codeigniter"
   - "cp -R /home/travis/builds/willmendesneto/CI-Code-Generator/codeigniter/* /home/travis/builds/willmendesneto/CI-Code-Generator/"
+  - "ls"
   - "rm -rf /home/travis/builds/willmendesneto/CI-Code-Generator/codeigniter/"
   - "curl -s http://getcomposer.org/installer | php"
-  - "ls"
   - "php composer.phar --dev install"
 
 after_script:
