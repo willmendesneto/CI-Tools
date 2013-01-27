@@ -8,7 +8,7 @@ php:
 before_script:
   - "git clone --branch=master git://github.com/EllisLab/CodeIgniter.git codeigniter"
   - "ls"
-  - "cp -R codeigniter/* willmendesneto/CI-Code-Generator/"
+  - "cp -R codeigniter/* ../CI-Code-Generator/"
   - "ls"
   - "rm -rf codeigniter/"
   - "ls"
