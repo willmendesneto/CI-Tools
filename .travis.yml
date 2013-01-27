@@ -7,11 +7,8 @@ php:
 
 before_script:
   - "git clone --branch=master git://github.com/EllisLab/CodeIgniter.git codeigniter"
-  - "ls"
   - "cp -R codeigniter/* ../CI-Code-Generator/"
-  - "ls"
   - "rm -rf codeigniter/"
-  - "ls"
   - "curl -s http://getcomposer.org/installer | php"
   - "php composer.phar --dev install"
 
