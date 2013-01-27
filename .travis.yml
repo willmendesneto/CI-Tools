@@ -10,6 +10,7 @@ before_script:
   - "cp -R /home/travis/builds/willmendesneto/CI-Code-Generator/codeigniter/* /home/travis/builds/willmendesneto/CI-Code-Generator/"
   - "rm -rf /home/travis/builds/willmendesneto/CI-Code-Generator/codeigniter/"
   - "curl -s http://getcomposer.org/installer | php"
+  - "ls"
   - "php composer.phar --dev install"
 
 after_script:
