@@ -6,7 +6,7 @@ php:
   - 5.4
 
 before_script:
-  - "git clone --branch=master git://github.com/EllisLab/CodeIgniter.git /home/travis/builds/willmendesneto/CI-Code-Generator/codeigniter"
+  - "git clone --branch=master git://github.com/EllisLab/CodeIgniter.git codeigniter"
   - "ls"
   - "cp -R /home/travis/builds/willmendesneto/CI-Code-Generator/codeigniter/* /home/travis/builds/willmendesneto/CI-Code-Generator/"
   - "ls"
