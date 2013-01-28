@@ -16,7 +16,7 @@ class CITools
      * Folder "assets" localization
      *
      */
-    public static $assets_dir = 'assets/';
+    public static $assets_dir = '../assets/';
 
     /**
      * Css directory in assets
@@ -61,7 +61,7 @@ class CITools
     /**
      * As a convenience, fetch popular assets for user
      *
-     * php ci-code-generator generator:assets jquery.js
+     * php ci-tools generator:assets jquery.js
      */
     public static $external_assets = array(
         // JavaScripts
@@ -70,10 +70,10 @@ class CITools
         'underscore.js' => 'http://underscorejs.org/underscore.js',
         'handlebars.js' => 'http://cloud.github.com/downloads/wycats/handlebars.js/handlebars-1.0.rc.1.js',
         'jasmine-jquery' => 'https://raw.github.com/velesin/jasmine-jquery/master/lib/jasmine-jquery.js',
-        'livejs' => 'http://livejs.com/live.js',
+        'live.js' => 'http://livejs.com/live.js',
         // CSS
         'normalize.css' => 'https://raw.github.com/necolas/normalize.css/master/normalize.css',
-        'reset-css' => 'http://meyerweb.com/eric/tools/css/reset/reset200802.css'
+        'reset.css' => 'http://meyerweb.com/eric/tools/css/reset/reset200802.css'
     );
 
     /**
@@ -85,6 +85,7 @@ class CITools
     public function run(array $arguments){
 
         self::$appDir = CodeigniterTemplate::getApplicationDirectory();
+        //self::$assets_dir = self::$appDir . self::$assets_dir;
 
         if ( ! isset($arguments[0]))
             throw new \Exception("Please choice a option.\n" . $this->help());
@@ -114,11 +115,11 @@ class CITools
         // Extract the task method from the task string. Methods are called
         // on tasks by separating the task and method with a single colon.
         // If no task is specified, "run" is used as the default.
-        if (strpos($task, 'generator:') !== FALSE)
+        if (strpos($task, 'generator:') !== FALSE){
             list($task, $method) = explode('generator:', $task);
-        else
+        }else{
             $method = 'help';
-
+        }
         return array($task, $method);
     }
 
@@ -155,8 +156,8 @@ EOT;
      *
      * HOW TO USE:
      *
-     * php ci-code-generator generator:controller Admin
-     * php ci-code-generator generator:controller Admin index edit
+     * php ci-tools generator:controller Admin
+     * php ci-tools generator:controller Admin index edit
      *
      * @param array $args
      * @return string
@@ -195,8 +196,8 @@ EOT;
      *
      * HOW TO USE:
      *
-     * php ci-code-generator generator:model User
-     * php ci-code-generator generator:model User getUsers
+     * php ci-tools generator:model User
+     * php ci-tools generator:model User getUsers
      *
      * @param array $args
      * @return string
@@ -230,8 +231,8 @@ EOT;
      *
      * USAGE:
      *
-     * php ci-code-generator generator:view index
-     * php ci-code-generator generator:view index add edit
+     * php ci-tools generator:view index
+     * php ci-tools generator:view index add edit
      *
      * @param array $args
      * @return bool
@@ -267,10 +268,10 @@ EOT;
             throw new \Exception("Warning: File already exists at $file_path\n");
         }
 
-        // As a precaution, let's see if we need to make the folder.
         if( !is_dir(dirname($file_path))){
             mkdir(dirname($file_path));
         }
+
         if ( file_put_contents($file_path, self::$content) !== false ) {
             echo $success;
             return;
@@ -278,8 +279,6 @@ EOT;
 
         echo "[ ] Whoops - something wrong! I can't create file in $file_path \n";
     }
-
-
 
     /**
      * Crazy sloppy prettify. TODO - Cleanup
@@ -313,15 +312,13 @@ EOT;
         return str_replace($where, $where . $to_add, $content);
     }
 
-
-
     /**
      * Create assets in the public directory
      *
      * USAGE:
-     * php ci-code-generator generator:assets style1.css some_module.js
+     * php ci-tools generator:assets style1.css some_module.js
      *
-     * @param  $assets array
+     * @param  $assets aarray
      * @return void
      */
     public function asset($assets) { return $this->assets($assets); }
@@ -333,46 +330,71 @@ EOT;
         }
 
         foreach( $assets as $asset ) {
-            // What type of file? CSS, JS?
-            $ext = File::extension($asset);
 
-            if( !$ext ) {
-                // Hmm - not sure what to do.
-                echo "Warning: Could not determine file type. Please specify an extension.";
-                continue;
+            if( !$this->getExtension($asset) ) {
+                throw new \Exception("Warning: Could not determine file type. Please specify an extension.");
             }
 
             // Set the path, dependent upon the file type.
-            switch ($ext) {
-                case 'js':
-                    $path = self::$js_dir . $asset;
-                    break;
-
-                case 'coffee':
-                    $path = self::$coffee_dir . $asset;
-                    break;
-
-                case 'scss':
-                case 'sass':
-                    $path = self::$sass_dir . $asset;
-                    break;
-
-                case 'less':
-                    $path = self::$less_dir . $asset;
-                    break;
-
-                case 'css':
-                default:
-                    $path = self::$css_dir . $asset;
-                    break;
-            }
+            $path = $this->getFileAssetsDirectory($asset);
 
             if ( $this->is_external_asset($asset) ) {
                 $this->fetch($asset);
-            } else { self::$content = ''; }
+            } else {
+                self::$content = '';
+            }
 
-            $this->write_to_file(self::$assets_dir . $path, '');
+            $this->write_to_file(__DIR__ . self::$appDir . self::$assets_dir . $path, '');
         }
+    }
+
+    /**
+     * Get file extension
+     *
+     * @param string $file_name
+     * @return string
+     */
+    public function getExtension($file_name){
+        // Grab the file extension
+        $x = explode('.', $file_name);
+        return end($x);
+    }
+
+    /**
+     * Get assets directory by the extension file
+     *
+     * @param int $file_name file name
+     * @return string
+     */
+    public function getFileAssetsDirectory($file_name)
+    {
+
+        $ext = $this->getExtension($file_name);
+        // Set the path, dependent upon the file type.
+        switch ($ext) {
+            case 'js':
+                $path = self::$js_dir . $file_name;
+                break;
+
+            case 'coffee':
+                $path = self::$coffee_dir . $file_name;
+                break;
+
+            case 'scss':
+            case 'sass':
+                $path = self::$sass_dir . $file_name;
+                break;
+
+            case 'less':
+                $path = self::$less_dir . $file_name;
+                break;
+
+            case 'css':
+            default:
+                $path = self::$css_dir . $file_name;
+                break;
+        }
+        return $path;
     }
 
     /**
