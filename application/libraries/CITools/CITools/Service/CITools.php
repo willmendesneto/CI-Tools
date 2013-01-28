@@ -65,11 +65,11 @@ class CITools
      */
     public static $external_assets = array(
         // JavaScripts
-        'jquery.js' => 'http://code.jquery.com/jquery.js',
+        'jquery.js' => 'http://code.jquery.com/jquery.min.js',
         'backbone.js' => 'http://backbonejs.org/backbone.js',
         'underscore.js' => 'http://underscorejs.org/underscore.js',
         'handlebars.js' => 'http://cloud.github.com/downloads/wycats/handlebars.js/handlebars-1.0.rc.1.js',
-        'jasmine-jquery' => 'https://raw.github.com/velesin/jasmine-jquery/master/lib/jasmine-jquery.js',
+        'jasmine-jquery.js' => 'https://raw.github.com/velesin/jasmine-jquery/master/lib/jasmine-jquery.js',
         'live.js' => 'http://livejs.com/live.js',
         // CSS
         'normalize.css' => 'https://raw.github.com/necolas/normalize.css/master/normalize.css',
