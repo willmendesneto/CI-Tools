@@ -9,7 +9,6 @@ use CITools\Template\CodeigniterTemplate;
 class CITools
 {
 
-
     public static $appDir;
 
     /**
@@ -305,10 +304,16 @@ EOT;
         self::$content = trim($content);
     }
 
-
+    /**
+     * Add element(s) after content
+     *
+     * @param type $where Where will be add content; Initial point
+     * @param type $to_add Content will be added
+     * @param type $content Actual value of content
+     * @return type
+     */
     public function add_after($where, $to_add, $content)
     {
-        // return preg_replace('/' . $where . '/', $where . $to_add, $content, 1);
         return str_replace($where, $where . $to_add, $content);
     }
 

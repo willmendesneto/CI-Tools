@@ -6,7 +6,6 @@ use CITools\Template\Adapter\TemplateInterface as TemplateInterface;
 
 final class CodeigniterTemplate implements TemplateInterface {
 
-
     public static function getApplicationDirectory(){
         $applicationDirectory = DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
         return $applicationDirectory;
