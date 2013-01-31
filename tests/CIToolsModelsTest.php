@@ -44,13 +44,6 @@ class CIToolsModelsTest extends PHPUnit_Framework_TestCase {
 	public $modelsDirectory;
 
 	/**
-	 * Controllers Directory
-	 *
-	 * @var string
-	 */
-	public $assetsDirectory;
-
-	/**
 	 * Setting up the tests
 	 *
 	 * @return type
@@ -68,7 +61,7 @@ class CIToolsModelsTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Testing generator Controller File
+	 * Testing generator Model File
 	 *
 	 * @return void
 	 */
@@ -91,7 +84,7 @@ class CIToolsModelsTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Testing generator Controller File With MethoDIRECTORY_SEPARATOR
+	 * Testing generator Model File With Methods
 	 *
 	 * @return void
 	 */
@@ -100,6 +93,33 @@ class CIToolsModelsTest extends PHPUnit_Framework_TestCase {
 			0 => 'generator:model',
 			1 => 'Test_with_methods_model',
 			2 => 'getInfoTest',
+			3 => 'insertInfoTest',
+			4 => 'updateInfoTest',
+			5 => 'deleteInfoTest'
+		);
+
+
+		$this->_generator->run($this->_args);
+		$this->assertTrue( is_dir($this->modelsDirectory) );
+		$this->assertTrue( file_exists($this->modelsDirectory . $this->_args[1] . '.php' ));
+
+		//	Removing file generated
+		unlink($this->modelsDirectory . $this->_args[1] . '.php');
+
+		//	Verifying if file was deleted
+		$this->assertTrue( !file_exists($this->modelsDirectory . $this->_args[1] . '.php' ));
+	}
+
+	/**
+	 * Testing generator Model File With Methods Setting the parent Model
+	 *
+	 * @return void
+	 */
+	public function test_generatorModelSettingParentModel(){
+		$this->_args = array(
+			0 => 'generator:model',
+			1 => 'Test_with_methods_model',
+			2 => 'extends:MY_Model',
 			3 => 'insertInfoTest',
 			4 => 'updateInfoTest',
 			5 => 'deleteInfoTest'

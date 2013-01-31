@@ -31,25 +31,33 @@ Linux
 
 Generate a view file with the specified name in `application/views` directory
 
-    php ci-tools generator:view [names-of-views]
+    php ci-tools generator:view [name]
 
 ### Generator:model
 
 Generate a model file with the specified name in 'application/models' directory
 
-    php ci-tools generator:model [name-of-model] [methods]
+    php ci-tools generator:model [name] [methods]
+
+OR
+
+    php ci-tools generator:model [name] [extends:class] [methods]
 
 ### Generator:controller
 
 Generate a controller file with the specified name in `application/controllers` directory
 
-    php ci-tools generator:controller [name-of-controller] [methods]
+    php ci-tools generator:controller [name] [methods]
+
+OR
+
+	php ci-tools generator:controller [name] [extends:class] [methods]
 
 ### Generator:assets
 
 Generate a view file with the specified name in `assets/` directory
 
-    php ci-tools generator:assets [names-of-assets]
+    php ci-tools generator:assets [name]
 
 
 ### * New features soon

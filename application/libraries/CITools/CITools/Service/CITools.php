@@ -141,9 +141,9 @@ class CITools
     public function help()
     {
         echo <<<EOT
-\n=============  GENERATOR COMMANDS  =============\n
-generator:controller [name] [methods]
-generator:model [name] [methods]
+\n=============  CI-TOOLS COMMANDS  =============\n
+generator:controller [name] [extends:class] [methods]
+generator:model [name] [extends:class] [methods]
 generator:view [view]
 generator:assets [asset]
 \n=====================  END  ====================\n
@@ -157,6 +157,7 @@ EOT;
      *
      * php ci-tools generator:controller Admin
      * php ci-tools generator:controller Admin index edit
+     * php ci-tools generator:controller Admin extends:CI_Controller index edit
      *
      * @param array $args
      * @return string
@@ -173,8 +174,16 @@ EOT;
         // Where will this file be stored?
         $file_path = __DIR__ . self::$appDir . 'controllers'. DIRECTORY_SEPARATOR . "$class_name.php";
 
+        // Parent Controller Class verification
+        if ( isset($args[0]) and strpos($args[0], 'extends:') !== FALSE ) {
+            list($method, $parentClass ) = explode(':', $args[0]);
+            unset($args[0]);
+        } else {
+            $parentClass =  'CI_Controller';
+        }
+
         // Begin building up the file's content
-        self::$content = CodeigniterTemplate::generatorClass($class_name, 'CI_Controller');
+        self::$content = CodeigniterTemplate::generatorClass($class_name, $parentClass);
         $content = '';
         // Now we filter through the args, and create the funcs.
         foreach($args as $method) {
@@ -197,6 +206,7 @@ EOT;
      *
      * php ci-tools generator:model User
      * php ci-tools generator:model User getUsers
+     * php ci-tools generator:model User extends:CI_Model getUsers
      *
      * @param array $args
      * @return string
@@ -209,8 +219,16 @@ EOT;
 
         $file_path = __DIR__ . self::$appDir . 'models'. DIRECTORY_SEPARATOR . str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $class_name) . '.php';
 
+        // Parent Controller Class verification
+        if ( isset($args[0]) and strpos($args[0], 'extends:') !== FALSE ) {
+            list($method, $parentClass ) = explode(':', $args[0]);
+            unset($args[0]);
+        } else {
+            $parentClass = 'CI_Model';
+        }
+
         // Begin building up the file's content
-        self::$content = CodeigniterTemplate::generatorClass($class_name, 'CI_Model');
+        self::$content = CodeigniterTemplate::generatorClass($class_name, $parentClass);
         $content = '';
         // Now we filter through the args, and create the funcs.
         foreach($args as $method) {

@@ -82,7 +82,7 @@ class CIToolsControllersTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Testing generator Controller File With MethoDIRECTORY_SEPARATOR
+	 * Testing generator Controller File With Methods
 	 *
 	 * @return void
 	 */
@@ -97,6 +97,33 @@ class CIToolsControllersTest extends PHPUnit_Framework_TestCase {
 			6 => 'deleteInfoTest'
 		);
 
+
+		$this->_generator->run($this->_args);
+		$this->assertTrue( is_dir($this->controllersDirectory) );
+		$this->assertTrue( file_exists($this->controllersDirectory . $this->_args[1] . '.php' ));
+
+		//	Removing file generated
+		unlink($this->controllersDirectory . $this->_args[1] . '.php');
+
+		//	Verifying if file was deleted
+		$this->assertTrue( !file_exists($this->controllersDirectory . $this->_args[1] . '.php' ));
+	}
+
+	/**
+	 * Testing generator Controller File With Methods Setting the parent Controller
+	 *
+	 * @return void
+	 */
+	public function test_generatorControllerSettingParentController(){
+		$this->_args = array(
+			0 => 'generator:controller',
+			1 => 'Test_Controller_With_Parent_Controller',
+			2 => 'extends:CI_Controller',
+			3 => 'viewInfoTest',
+			4 => 'insertInfoTest',
+			5 => 'updateInfoTest',
+			6 => 'deleteInfoTest'
+		);
 
 		$this->_generator->run($this->_args);
 		$this->assertTrue( is_dir($this->controllersDirectory) );
