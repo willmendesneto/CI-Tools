@@ -18,6 +18,7 @@ final class CodeigniterTemplate implements TemplateInterface {
      */
     public static function generatorFunction($func_name)
     {
+        $load_view = '$this->load->view(\''.$func_name.'\');';
         return <<<EOT
 
     /**
@@ -26,7 +27,7 @@ final class CodeigniterTemplate implements TemplateInterface {
      */
     public function {$func_name}()
     {
-        //  Insert code here!
+        {$load_view}
     }
 
 EOT;
