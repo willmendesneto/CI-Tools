@@ -267,7 +267,16 @@ EOT;
 
         // Begin building up the file's content
         self::$content = CodeigniterTemplate::generatorClass($class_name, $parentClass);
-        $content = '';
+        $content = '
+
+    /**
+     * Description
+     * @return void
+     */
+    public function __construct(){
+        parent::__construct();
+    }
+';
         // Now we filter through the args, and create the funcs.
         foreach($args as $method) {
             $content .= CodeigniterTemplate::generatorFunction("{$method}");
