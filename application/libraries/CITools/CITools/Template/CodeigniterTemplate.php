@@ -10,6 +10,7 @@ final class CodeigniterTemplate implements TemplateInterface {
         $applicationDirectory = DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
         return $applicationDirectory;
     }
+
     /**
      * Generate a function for template generated
      * @param string $func_name function name
@@ -52,4 +53,25 @@ class $name";
         return $content;
     }
 
+
+    /**
+     * Generate a view template
+     * @param string $meta_title view title
+     * @return type
+     */
+    public static function generatorView($meta_title, $contentTitle = '')
+    {
+        return <<<EOT
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>{$meta_title}</title>
+    </head>
+    <body>
+        <h1>{$contentTitle}</h1>
+    </body>
+</html>
+EOT;
+    }
 }

@@ -59,6 +59,25 @@ Generate a view file with the specified name in `assets/` directory
 
     php ci-tools generator:assets [name]
 
+List of the external assets files:
+
+Javascript
+* jquery.js (http://code.jquery.com/jquery.min.js)
+* backbone.js (http://backbonejs.org/backbone.js)
+* underscore.js (http://underscorejs.org/underscore.js)
+* handlebars.js (http://cloud.github.com/downloads/wycats/handlebars.js/handlebars-1.0.rc.1.js)
+* jasmine-jquery.js (https://raw.github.com/velesin/jasmine-jquery/master/lib/jasmine-jquery.js)
+* live.js (http://livejs.com/live.js)
+
+CSS
+* normalize.css (https://raw.github.com/necolas/normalize.css/master/normalize.css)
+* reset.css (http://meyerweb.com/eric/tools/css/reset/reset200802.css')
+
+### Generator:key
+
+Generate a encryption_key for the application in `application/config/config.php` file
+
+    php ci-tools generator:key
 
 ### * New features soon
 

@@ -52,6 +52,7 @@ class CIToolsModelsTest extends PHPUnit_Framework_TestCase {
 		parent::setUp();
 		parent::tearDown();
 
+        $this->CI = &get_instance();
         //$this->CI = &get_instance();
 
 		//	Setting Models Directory
