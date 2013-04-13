@@ -1,4 +1,4 @@
-CI-Code-Generator [![Build Status](https://travis-ci.org/willmendesneto/CI-Code-Generator.png?branch=master)](https://travis-ci.org/willmendesneto/CI-Code-Generator)
+CI-Tools [![Build Status](https://travis-ci.org/willmendesneto/CI-Tools.png?branch=master)](https://travis-ci.org/willmendesneto/CI-Code-Generator)
 =================
 
 A code generator console for Codeigniter Framework. Based in other code generators
